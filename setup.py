@@ -23,7 +23,7 @@ from setuptools import setup
 
 setup(
     name='hpestorapi',
-    version='0.9.4',
+    version='0.9.5',
     packages=['hpestorapi'],
     url='https://github.com/HewlettPackard/python-storage-clients',
     license=open('LICENSE.txt').read(),

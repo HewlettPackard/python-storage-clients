@@ -43,6 +43,4 @@ import hpestorapi
  ```
 
 ## Documentation
-The latest version of the documentation can be found here:
-
-* [PDF version](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.4.pdf)
+The latest version of the documentation can be found here * [pdf](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf)
