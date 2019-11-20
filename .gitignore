@@ -1,4 +1,9 @@
-
+# Python bytecode and cache
 *.pyc
 __pycache__/
+
+# JetBrains PyCharm project settings
+.idea/
+
+# Application logs
 *.log
