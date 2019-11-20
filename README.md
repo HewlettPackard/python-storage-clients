@@ -25,7 +25,7 @@ hpestorapi library depends on:
 Get a copy of source code
 ```
 # git clone https://github.com/HewlettPackard/python-storage-clients.git
-# cd hpestorapi
+# cd python-storage-clients
 ```
 
 Install package with dependencies:
@@ -43,4 +43,4 @@ import hpestorapi
  ```
 
 ## Documentation
-The latest version of the documentation can be found here [pdf](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf)
+The latest version of the documentation can be found [here (pdf)](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf)
