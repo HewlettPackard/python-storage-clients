@@ -30,7 +30,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestoreapi.xp')
+LOG = logging.getLogger('hpestorapi.xp')
 
 
 class ConfManager:
