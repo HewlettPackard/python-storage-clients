@@ -33,5 +33,16 @@ setup(
                  'Rest API services for HPE storage and disk backup '
                  'devices'),
     python_requires='>=3.6',
-    install_requires=['requests']
+    install_requires=['requests'],
+    keywords=['HPE', 'REST', 'StoreOnce', '3PAR', 'XP7', 'Command View AE', 'Disk array'],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+    ],
 )
