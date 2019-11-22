@@ -21,15 +21,74 @@
 
 import flask
 from flask_restful import Resource, reqparse
+from random import randint
+import json
 
 
 class Credentials(Resource):
     def __init__(self):
-        self.auth = {'user': 'password'}
-        self.key = '48A70B8A8301C458037E0821'
+        self.users = [{'3paradm': {'role': 'Super', 'password': '3pardata'}},
+                      {'user': {'role': 'Browse', 'password': 'password'}}
+                     ]
+        self.sessions = self.load_sessions()
+
+    def auth_check(self, user, password):
+        """
+        Check user credentials.
+
+        :param user: Device username.
+        :param password: Device password.
+        :return: Role name (if authorized) or None.
+        """
+        role = None
+        for record in self.users:
+            if user in record.keys():
+                if password == record.get(user).get('password'):
+                    role = record.get(user).get('password')
+
+        return role
+
+    def __del__(self):
+        self.save_sessions(self.sessions)
+
+    def load_sessions(self):
+        """
+        Get sessions list from disk.
+
+        :return: dict()
+        """
+        try:
+            with open("sessions.json") as file:
+                data = json.load(file)
+        except:
+            data = {}
+
+        return data
+
+    def save_sessions(self, data):
+        """
+         Dump sessions list to disk.
+
+        :return: None
+        """
+        try:
+            with open("sessions.json", "w") as file:
+                json.dump(data, file)
+        except:
+            print("Can not save active sessions list to disk. Check permissions.")
+
+    def gen_seskey(self):
+        """
+        Generate new 3PAR WSAPI session key.
+
+        :return:
+        """
+        return ''.join([str(format(randint(0, 15), 'X')) for i in range(24)])
 
     def post(self, key=None):
-        # Parse request
+        """
+        Open new HPE 3PAR WSAPI session.
+        """
         parser = reqparse.RequestParser()
         parser.add_argument('Content-Type', type=str, location='headers',
                             choices='application/json', required=True)
@@ -41,13 +100,17 @@ class Credentials(Resource):
         # Check credentials
         user = arg['user']
         password = arg['password']
-        if (user in self.auth.keys()) and (password == self.auth.get(user)):
-            return {'key': self.key}, 201
+        if self.auth_check(user, password) is not None:
+            key = self.gen_seskey()
+            self.sessions[key] = user
+            return {'key': key}, 201
 
         return {'desc': 'Wrong username or password'}, 403
 
     def delete(self, key):
-        # Parse request
+        """
+        Close HPE 3PAR WSAPI session
+        """
         parser = reqparse.RequestParser()
         parser.add_argument('Content-Type', type=str, location='headers',
                             choices='application/json', required=True)
@@ -56,7 +119,8 @@ class Credentials(Resource):
         arg = parser.parse_args()
 
         # Check session key
-        if key == self.key:
+        if key in self.sessions.keys():
+            self.sessions.pop(key)
             return flask.Response(status=200)
 
         return flask.Response(status=403)
