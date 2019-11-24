@@ -21,17 +21,20 @@
 
 from setuptools import setup
 
+
 setup(
     name='hpestorapi',
     version='0.9.5',
     packages=['hpestorapi'],
     url='https://github.com/HewlettPackard/python-storage-clients',
-    license=open('LICENSE.txt').read(),
+    license='Apache License 2.0',
     author='Hewlett Packard Enterprise Development',
     author_email='ivan.smirnov@hpe.com',
     description=('Python library that provides very simple way to use '
                  'Rest API services for HPE storage and disk backup '
                  'devices'),
+    long_description=open('README.rst').read(),
+    long_description_content_type='text/x-rst',
     python_requires='>=3.6',
     install_requires=['requests'],
     keywords=['HPE', 'REST', 'StoreOnce', '3PAR', 'XP7', 'Command View AE', 'Disk array'],
