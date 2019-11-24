@@ -23,24 +23,25 @@ hpestorapi library depends on:
 
 ### Setup
 Get a copy of source code
-```
-# git clone https://github.com/HewlettPackard/python-storage-clients.git
-# cd python-storage-clients
-```
+::
+
+    # git clone https://github.com/HewlettPackard/python-storage-clients.git
+    # cd python-storage-clients
 
 Install package with dependencies:
-```
-# python setup.py install
-```
+::
+
+    # python setup.py install
 
 Import hpestorapi library in your python script:
-```python
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+::
 
-import hpestorapi
-# ...
- ```
+    #!/usr/bin/env python3
+    # -*- coding: utf-8 -*-
+
+    import hpestorapi
+
 
 ## Documentation
 The latest version of the documentation can be found [here (pdf)](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf)
+
