@@ -22,8 +22,7 @@ Requirements
 hpestorapi library depends on:
 
 * Python 3.6 or newer
-* Python `requests library <http://python-requests.org>`_ version
-    2.19.1 or newer (should work with old versions, but not tested)
+* Python `requests library <http://python-requests.org>`_ version 2.19.1 or newer (should work with old versions, but not tested)
 
 Setup
 -------------------------------------
