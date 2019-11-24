@@ -22,7 +22,7 @@ Requirements
 hpestorapi library depends on:
 
 * Python 3.6 or newer
-* Python [requests library](http://python-requests.org) version
+* Python `requests library <http://python-requests.org>`_ version
     2.19.1 or newer (should work with old versions, but not tested)
 
 Setup
@@ -49,5 +49,5 @@ Import hpestorapi library in your python script:
 
 Documentation
 ====================================
-The latest version of the documentation can be found [here (pdf)](https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf)
+The latest version of the documentation can be found `here (pdf)<https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_
 
