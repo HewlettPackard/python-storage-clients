@@ -105,7 +105,7 @@ class Credentials(Resource):
             self.sessions[key] = user
             return {'key': key}, 201
 
-        return {'desc': 'Wrong username or password'}, 403
+        return {"code": 5, "desc": "The user name or password is invalid."}, 403
 
     def delete(self, key):
         """
@@ -117,6 +117,9 @@ class Credentials(Resource):
         parser.add_argument('X-HP3PAR-WSAPI-SessionKey', type=str,
                             location='headers', required=True)
         arg = parser.parse_args()
+
+        if key != arg['X-HP3PAR-WSAPI-SessionKey']:
+            return flask.Response(status=403)
 
         # Check session key
         if key in self.sessions.keys():
