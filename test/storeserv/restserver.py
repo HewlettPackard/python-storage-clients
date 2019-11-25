@@ -24,13 +24,17 @@
 
 from flask import Flask
 from flask_restful import Api
-from resources.credentials import Credentials
 
-app = Flask(__name__)
-api = Api(app)
-api.add_resource(Credentials,
-                 '/api/v1/credentials',
-                 '/api/v1/credentials/<string:key>')
+from .resources.credentials import Credentials
 
-if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=8008)
+
+class ApiInstance:
+    def __init__(self):
+        self.app = Flask(__name__)
+        self.api = Api(self.app)
+        self.api.add_resource(Credentials,
+                              '/api/v1/credentials',
+                              '/api/v1/credentials/<string:key>')
+
+    def run(self):
+        self.app.run(debug=True, host='127.0.0.1', port=8008)

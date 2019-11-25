@@ -19,48 +19,71 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
+import sys
+sys.path.append('../')
+
 import unittest
 import requests
+import multiprocessing
 import hpestorapi
+from storeserv.restserver import ApiInstance
+from time import sleep
 
 class TestStoreServ(unittest.TestCase):
+    def worker(self):
+        server = ApiInstance()
+        server.run()
+
+    def setUp(self):
+        self.process = multiprocessing.Process(target=self.worker)
+        self.process.start()
+        sleep(1)
+
+    def tearDown(self):
+        self.process.terminate()
+        while self.process.is_alive():
+            sleep(1)
+
     def test_exception_connection_error(self):
-        '''
+        """
         ConnectionError exception raising test.
         Wrong network address, firewall or rest api connection limit ...
-        '''
-        array = hpestorapi.StoreServ('wrong-address', 'user', 'password', ssl=False)
+        """
+        array = hpestorapi.StoreServ('fake-address', '3paradm', '3pardata', ssl=False)
         with self.assertRaises(requests.exceptions.ConnectionError):
             array.open()
 
+
     def test_exception_auth_error(self):
-        '''
+        """
         AuthError exception raising text.
         Wrong user or password.
-        '''
+        """
         array = hpestorapi.StoreServ('127.0.0.1', 'user', 'wrong-password', ssl=False)
         with self.assertRaises(hpestorapi.storeserv.AuthError):
             array.open()
 
+    '''
     def test_get(self):
-        '''
+        """
         GET request
-        '''
-        array = hpestorapi.StoreServ('192.168.186.200', '3paradm', 'PTzk5fVt')
+        """
+        array = hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False)
         array.open()
         status, _ = array.get('system')
         self.assertEqual(status, 200)
-
+        
     #@unittest.skipUnless(user == '3paradm', 'Need 3PAR admin rights')
     def test_post(self):
-        '''
+        """
         POST request
-        '''
+        """
         array = hpestorapi.StoreServ('127.0.0.1', 'user', 'password', ssl=False)
         array.open()
         status, _ = array.post('hosts', {'name': 'RestApiTestHost',
                                          'persona': 5})
         self.assertEqual(status, 201)
+    '''
 
 if __name__ == '__main__':
     unittest.main()
