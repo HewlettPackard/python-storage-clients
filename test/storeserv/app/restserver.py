@@ -22,10 +22,10 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
+
 from flask import Flask
 from flask_restful import Api
-
-from .resources.credentials import Credentials
+from resources.credentials import Credentials
 
 
 class ApiInstance:
@@ -37,4 +37,9 @@ class ApiInstance:
                               '/api/v1/credentials/<string:key>')
 
     def run(self):
-        self.app.run(debug=True, host='127.0.0.1', port=8008)
+        self.app.run(debug=False, host='127.0.0.1', port=8008)
+
+
+if __name__ == "__main__":
+    server = ApiInstance()
+    server.run()
