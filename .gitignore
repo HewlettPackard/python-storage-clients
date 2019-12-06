@@ -7,3 +7,6 @@ __pycache__/
 
 # Application logs
 *.log
+
+# Test utilities
+.tox/
