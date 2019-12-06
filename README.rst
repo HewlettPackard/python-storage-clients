@@ -46,6 +46,15 @@ Import hpestorapi library in your python script:
     import hpestorapi
 
 
+Unit Tests
+====================================
+To run all unit tests:
+::
+
+    # pip install -r requirements/development.txt
+    # tox -p all
+
+
 Documentation
 ====================================
 The latest version of the documentation can be found here: `(pdf) <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_

@@ -19,12 +19,9 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-import sys
-sys.path.append('../')
-
 import unittest
 import requests
-import multiprocessing
+#import multiprocessing
 import hpestorapi
 from storeserv.restserver import ApiInstance
 from time import sleep
@@ -35,14 +32,15 @@ class TestStoreServ(unittest.TestCase):
         server.run()
 
     def setUp(self):
-        self.process = multiprocessing.Process(target=self.worker)
-        self.process.start()
-        sleep(1)
+#        self.process = multiprocessing.Process(target=self.worker)
+#        self.process.start()
+        sleep(3)
 
     def tearDown(self):
         self.process.terminate()
-        while self.process.is_alive():
-            sleep(1)
+        self.process.join()
+        #while self.process.is_alive():
+        #    sleep(1)
 
     def test_exception_connection_error(self):
         """
