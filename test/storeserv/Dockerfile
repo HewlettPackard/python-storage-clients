@@ -1,4 +1,5 @@
 FROM python:3.7-alpine
+LABEL maintainer="Ivan Smirnov <ivan.smirnov@hpe.com>"
 
 WORKDIR /usr/src/app
 COPY app /usr/src/app
