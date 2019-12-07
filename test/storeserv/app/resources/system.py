@@ -16,33 +16,27 @@
 #   under the License.
 
 """
-.. module:: test.storeserv
-    :synopsis: Flask server for testing hpestorapi.StoreServ
-
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-
-from flask import Flask
-from flask_restful import Api
-from resources.credentials import Credentials
-from resources.system import System
-
-
-class ApiInstance:
-    def __init__(self):
-        self.app = Flask(__name__)
-        self.api = Api(self.app)
-        self.api.add_resource(Credentials,
-                              '/api/v1/credentials',
-                              '/api/v1/credentials/<string:key>')
-        self.api.add_resource(System,
-                              '/api/v1/system')
-
-    def run(self):
-        self.app.run(debug=True, host='0.0.0.0', port=8008)
+import flask
+from flask_restful import Resource, reqparse
+from random import randint
+import json
 
 
-if __name__ == "__main__":
-    server = ApiInstance()
-    server.run()
+class System(Resource):
+    def get(self):
+        """
+        Get general information about storage system.
+        """
+        parser = reqparse.RequestParser()
+        parser.add_argument('Content-Type', type=str, location='headers',
+                            choices='application/json', required=True)
+        parser.add_argument('X-HP3PAR-WSAPI-SessionKey', type=str,
+                            location='headers', required=True)
+        arg = parser.parse_args()
+
+        # TODO
+
+        return {'key': 'key'}, 200
