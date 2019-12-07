@@ -37,7 +37,7 @@ class ApiInstance:
                               '/api/v1/credentials/<string:key>')
 
     def run(self):
-        self.app.run(debug=False, host='127.0.0.1', port=8008)
+        self.app.run(debug=True, host='0.0.0.0', port=8008)
 
 
 if __name__ == "__main__":
