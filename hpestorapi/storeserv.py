@@ -37,7 +37,7 @@ class StoreServ:
     """
         HPE 3PAR array implementation class.
     """
-    def __init__(self, address, username, password, ssl=True):
+    def __init__(self, address, username, password, ssl=True, port=None):
         """
         HPE 3PAR constructor.
 
@@ -55,6 +55,8 @@ class StoreServ:
         :param str password: Password for 3PAR Web Services API.
         :param bool ssl: (optional) Use secure https (True) or plain text
             http (False).
+        :param int port: (optional) Custom port number for 3PAR Web Services
+            API.
         :return: None
 
         """
@@ -78,10 +80,18 @@ class StoreServ:
             }
 
         # Generate static part of URL
-        if ssl:
-            self._base_url = f'https://{address}:8080/api/v1'
+        if port is not None:
+            # Use custom user-defined port
+            if ssl:
+                self._base_url = f'https://{address}:{port}/api/v1'
+            else:
+                self._base_url = f'http://{address}:{port}/api/v1'
         else:
-            self._base_url = f'http://{address}:8008/api/v1'
+            # Use default port number
+            if ssl:
+                self._base_url = f'https://{address}:8080/api/v1'
+            else:
+                self._base_url = f'http://{address}:8008/api/v1'
 
     def __del__(self):
         if self._key is not None:
