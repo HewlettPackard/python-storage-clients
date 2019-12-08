@@ -16,33 +16,18 @@
 #   under the License.
 
 """
-.. module:: test.storeserv
-    :synopsis: Flask server for testing hpestorapi.StoreServ
-
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
+import flask
+import json
 
-from flask import Flask
-from flask_restful import Api
-from resources.credentials import Credentials
-from resources.system import System
+def response(code, data=None):
+    if data is not None:
+        resp = flask.Response(status=code, response=json.dumps(data), content_type='application/json')
+    else:
+        resp = flask.Response(status=code)
+        resp.headers.pop('Content-Type')
 
-
-class ApiInstance:
-    def __init__(self):
-        self.app = Flask(__name__)
-        self.api = Api(self.app)
-        self.api.add_resource(Credentials,
-                              '/api/v1/credentials',
-                              '/api/v1/credentials/<string:key>')
-        self.api.add_resource(System,
-                              '/api/v1/system')
-
-    def run(self):
-        self.app.run(debug=False, host='0.0.0.0', port=8008)
-
-
-if __name__ == "__main__":
-    server = ApiInstance()
-    server.run()
+    resp.headers["Server"] = "hp3par-wsapi"
+    return resp

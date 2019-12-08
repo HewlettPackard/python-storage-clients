@@ -22,6 +22,8 @@
 import flask
 from flask_restful import Resource, reqparse
 import json
+from .credentials import Credentials
+from .common import response
 
 
 class System(Resource):
@@ -36,12 +38,13 @@ class System(Resource):
                             location='headers', required=True)
         arg = parser.parse_args()
 
+        auth = Credentials()
+        if not auth.check_seskey(arg['X-HP3PAR-WSAPI-SessionKey']):
+            return response(403)
+
         # Load response body from file
         with open('resources/system-get.json') as file:
             data = json.load(file)
 
         # Return flask response
-        response = flask.Response(response=json.dumps(data), content_type='application/json')
-        response.headers["Server"] = "hp3par-wsapi"
-        response.status_code = 200
-        return response
+        return response(200, data)

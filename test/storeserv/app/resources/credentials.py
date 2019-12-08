@@ -23,6 +23,7 @@ import flask
 from flask_restful import Resource, reqparse
 from random import randint
 import json
+from .common import response
 
 
 class Credentials(Resource):
@@ -32,7 +33,7 @@ class Credentials(Resource):
                      ]
         self.sessions = self.load_sessions()
 
-    def auth_check(self, user, password):
+    def check_passwd(self, user, password):
         """
         Check user credentials.
 
@@ -48,8 +49,21 @@ class Credentials(Resource):
 
         return role
 
+    def check_seskey(self, key):
+        """
+        Check session key.
+
+        :param key: Session key.
+        :return: True, if authorized.
+        """
+        if key in self.sessions.keys():
+            return True
+
+        return False
+
+
     def __del__(self):
-        self.save_sessions(self.sessions)
+        self.dump_sessions(self.sessions)
 
     def load_sessions(self):
         """
@@ -65,7 +79,7 @@ class Credentials(Resource):
 
         return data
 
-    def save_sessions(self, data):
+    def dump_sessions(self, data):
         """
          Dump sessions list to disk.
 
@@ -100,12 +114,12 @@ class Credentials(Resource):
         # Check credentials
         user = arg['user']
         password = arg['password']
-        if self.auth_check(user, password) is not None:
+        if self.check_passwd(user, password) is not None:
             key = self.gen_seskey()
             self.sessions[key] = user
-            return {'key': key}, 201
+            return response(201, {'key': key})
 
-        return {"code": 5, "desc": "The user name or password is invalid."}, 403
+        return response(403, {"code": 5, "desc": "invalid username or password"})
 
     def delete(self, key):
         """
@@ -119,11 +133,11 @@ class Credentials(Resource):
         arg = parser.parse_args()
 
         if key != arg['X-HP3PAR-WSAPI-SessionKey']:
-            return flask.Response(status=403)
+            return response(403)
 
         # Check session key
-        if key in self.sessions.keys():
+        if self.check_seskey(key):
             self.sessions.pop(key)
-            return flask.Response(status=200)
+            return response(200)
 
-        return flask.Response(status=403)
+        return response(403)
