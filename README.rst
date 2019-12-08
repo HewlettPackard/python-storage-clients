@@ -52,10 +52,11 @@ To run all unit tests:
 ::
 
     # pip install -r requirements/development.txt
-    # tox -p all
+    # docker build -t storeserv test/storeserv
+    # tox
 
 
 Documentation
 ====================================
-The latest version of the documentation can be found here: `(pdf) <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_
+The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_
 
