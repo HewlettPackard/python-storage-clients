@@ -21,7 +21,6 @@
 
 import flask
 from flask_restful import Resource, reqparse
-from random import randint
 import json
 
 
@@ -37,6 +36,12 @@ class System(Resource):
                             location='headers', required=True)
         arg = parser.parse_args()
 
-        # TODO
+        # Load response body from file
+        with open('resources/system-get.json') as file:
+            data = json.load(file)
 
-        return {'key': 'key'}, 200
+        # Return flask response
+        response = flask.Response(response=json.dumps(data), content_type='application/json')
+        response.headers["Server"] = "hp3par-wsapi"
+        response.status_code = 200
+        return response
