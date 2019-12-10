@@ -21,8 +21,8 @@
 
 import os
 import requests
-import hpestorapi
 import pytest
+import hpestorapi
 
 
 class TestStoreServ:
@@ -54,7 +54,7 @@ class TestStoreServ:
         """
         with hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False, port=http_port) as array:
             array.open()
-            status, data = array.get('system')
+            status, _ = array.get('system')
             assert status == 200
 
     def test_post(self, http_port):
