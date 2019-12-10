@@ -19,52 +19,59 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
+# pylint: disable=redefined-outer-name
+# ^^^ this
+
 import os
-import requests
+
 import pytest
+import requests
+
 import hpestorapi
 
 
-class TestStoreServ:
-    @pytest.fixture
-    def http_port(self):
-        return os.environ.get('STORESERV_8008_TCP')
+@pytest.fixture
+def port():
+    """
+    Returns 3PAR WSAPI network port number
+    """
+    return os.environ.get('STORESERV_8008_TCP')
 
-    def test_exception_connection_error(self, http_port):
-        """
-        ConnectionError exception raising test.
-        Wrong network address, firewall or rest api connection limit ...
-        """
-        array = hpestorapi.StoreServ('wrong-address', 'user', 'password', ssl=False, port=http_port)
-        with pytest.raises(requests.exceptions.ConnectionError):
-            array.open()
+def test_exception_connection_error(port):
+    """
+    ConnectionError exception raising test.
+    Wrong network address, firewall or rest api connection limit ...
+    """
+    array = hpestorapi.StoreServ('wrong-address', 'user', 'password', ssl=False, port=port)
+    with pytest.raises(requests.exceptions.ConnectionError):
+        array.open()
 
-    def test_exception_auth_error(self, http_port):
-        """
-        AuthError exception raising text.
-        Wrong user or password.
-        """
-        array = hpestorapi.StoreServ('127.0.0.1', 'user', 'wrong-password', ssl=False, port=http_port)
-        with pytest.raises(hpestorapi.storeserv.AuthError):
-            array.open()
+def test_exception_auth_error(port):
+    """
+    AuthError exception raising text.
+    Wrong user or password.
+    """
+    array = hpestorapi.StoreServ('127.0.0.1', 'user', 'wrong-password', ssl=False, port=port)
+    with pytest.raises(hpestorapi.storeserv.AuthError):
+        array.open()
 
-    def test_get(self, http_port):
-        """
-        GET request
-        """
-        with hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False, port=http_port) as array:
-            array.open()
-            status, _ = array.get('system')
-            assert status == 200
+def test_get(port):
+    """
+    GET request
+    """
+    with hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False, port=port) as array:
+        array.open()
+        status, _ = array.get('system')
+        assert status == 200
 
-    def test_post(self, http_port):
-        """
-        POST request
-        """
-        with hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False, port=http_port) as array:
-            array.open()
-            status, _ = array.post('hosts', {'name': 'RestApiTestHost', 'persona': 5})
-            assert status == 201
+def test_post(port):
+    """
+    POST request
+    """
+    with hpestorapi.StoreServ('127.0.0.1', '3paradm', '3pardata', ssl=False, port=port) as array:
+        array.open()
+        status, _ = array.post('hosts', {'name': 'RestApiTestHost', 'persona': 5})
+        assert status == 201
 
 
 if __name__ == '__main__':
