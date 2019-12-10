@@ -19,8 +19,10 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-import flask
 import json
+
+import flask
+
 
 def response(code, data=None):
     if data is not None:

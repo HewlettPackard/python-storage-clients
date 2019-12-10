@@ -19,11 +19,12 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-import flask
-from flask_restful import Resource, reqparse
 import json
-from .credentials import Credentials
+
+from flask_restful import Resource, reqparse
+
 from .common import response
+from .credentials import Credentials
 
 
 class System(Resource):

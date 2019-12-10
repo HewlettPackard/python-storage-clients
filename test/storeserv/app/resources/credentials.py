@@ -19,10 +19,11 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-import flask
-from flask_restful import Resource, reqparse
-from random import randint
 import json
+from random import randint
+
+from flask_restful import Resource, reqparse
+
 from .common import response
 
 
