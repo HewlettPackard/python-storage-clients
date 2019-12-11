@@ -26,6 +26,7 @@
 from flask import Flask
 from flask_restful import Api
 from resources.credentials import Credentials
+from resources.hosts import Hosts
 from resources.system import System
 
 
@@ -38,6 +39,8 @@ class ApiInstance:
                               '/api/v1/credentials/<string:key>')
         self.api.add_resource(System,
                               '/api/v1/system')
+        self.api.add_resource(Hosts,
+                              '/api/v1/hosts')
 
     def run(self):
         self.app.run(debug=False, host='0.0.0.0', port=8008)
