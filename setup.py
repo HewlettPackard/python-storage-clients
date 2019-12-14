@@ -24,7 +24,7 @@ from setuptools import setup
 
 setup(
     name='hpestorapi',
-    version='0.9.5',
+    version='0.9.6',
     packages=['hpestorapi'],
     url='https://github.com/HewlettPackard/python-storage-clients',
     license='Apache License 2.0',
