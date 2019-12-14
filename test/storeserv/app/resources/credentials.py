@@ -62,7 +62,6 @@ class Credentials(Resource):
 
         return False
 
-
     def __del__(self):
         self.dump_sessions(self.sessions)
 

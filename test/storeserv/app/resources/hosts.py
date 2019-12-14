@@ -26,9 +26,9 @@ from .credentials import Credentials
 
 
 class Hosts(Resource):
-    def post(self, key=None):
+    def post(self):
         """
-        Update host information.
+        Create new host.
         """
         parser = reqparse.RequestParser()
         parser.add_argument('Content-Type', type=str, location='headers',
@@ -37,6 +37,9 @@ class Hosts(Resource):
                             location='headers', required=True)
         arg = parser.parse_args()
 
+        # Is session key active?
         auth = Credentials()
         if not auth.check_seskey(arg['X-HP3PAR-WSAPI-SessionKey']):
             return response(403)
+
+        return response(201)

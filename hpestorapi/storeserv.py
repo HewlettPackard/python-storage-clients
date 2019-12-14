@@ -24,6 +24,7 @@
 
 import logging
 import warnings
+
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -58,7 +59,6 @@ class StoreServ:
         :param int port: (optional) Custom port number for 3PAR Web Services
             API.
         :return: None
-
         """
         self._address = address
         self._username = username

@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.7
 LABEL maintainer="Ivan Smirnov <ivan.smirnov@hpe.com>"
 
 WORKDIR /usr/src/app
