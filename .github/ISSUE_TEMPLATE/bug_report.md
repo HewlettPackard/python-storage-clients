@@ -1,8 +1,8 @@
 ---
-name: Bug report
+name: Bug report template
 about: Create a report to help us improve
 title: ''
-labels: ''
+labels: '[BUG]'
 assignees: ''
 
 ---
@@ -10,29 +10,19 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Code example with issue reproduction**
+You app code with issue.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**Python environment**
+Python language version: [e.g. 3.7]
+Python interpreter typew: [e.g. CPython, Cython, PyPy, ...]
+Python installed packages: ["# pip list" output]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Trace log**
+Please enable hpestorapi debug log according documentation (see section "Debug" -> "Enable logging") and provide trace log.
 
 **Additional context**
 Add any other context about the problem here.
