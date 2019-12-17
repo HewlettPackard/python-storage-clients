@@ -53,6 +53,7 @@ To run all unit tests:
 
     # pip install -r requirements/development.txt
     # docker build -t storeserv test/storeserv
+    # docker build -t storeonce3 test/storeonce3
     # tox
 
 
