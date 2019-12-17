@@ -38,6 +38,7 @@ class StoreServ:
     """
         HPE 3PAR array implementation class.
     """
+
     def __init__(self, address, username, password, ssl=True, port=None):
         """
         HPE 3PAR constructor.
@@ -77,7 +78,7 @@ class StoreServ:
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Accept-Language': 'en'
-            }
+        }
 
         # Generate static part of URL
         proto = 'https' if ssl else 'http'
@@ -107,7 +108,7 @@ class StoreServ:
         verify = kwargs.pop('verify', self._verify)
 
         # Set connection and read timeout (if not set by user)
-        timeout = kwargs.pop('timeout', self.timeout)
+        timeout = kwargs.pop('timeout', self._timeout)
 
         # Add standart and auth headers to parameter list
         kwargs.setdefault('headers', dict())
@@ -151,7 +152,7 @@ class StoreServ:
             if resp.content:
                 LOG.warning('Cannot decode JSON. Source string: "%s"',
                             resp.content)
-            return (resp.status_code, None)  # (status, data)
+            return resp.status_code, None  # (status, data)
 
         # Check wsapi session timeout error
         if (resp.status_code == 403) and (jdata.get('code', None) == 6):
@@ -175,7 +176,7 @@ class StoreServ:
                 LOG.debug('Request replay success.')
                 return replay
 
-        return (resp.status_code, jdata)
+        return resp.status_code, jdata
 
     def open(self):
         """
