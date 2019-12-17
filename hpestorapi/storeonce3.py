@@ -40,6 +40,9 @@ LOG = logging.getLogger('hpestorapi.storeonce')
 
 
 class StoreOnceG3:
+    """
+        HPE StoreOnce Gen 3 disk backup device implementation class.
+    """
     def set_timeout(self, timeout):
         self._timeout = timeout
 
@@ -52,7 +55,7 @@ class StoreOnceG3:
 
     http_timeout = property(get_timeout, set_timeout)
 
-    def __init__(self, address, user, password, cookie_dir=None):
+    def __init__(self, address, user, password, cookie_dir=None, port=443):
         """
         HPE StoreOnceG3 constructor.
 
@@ -63,12 +66,13 @@ class StoreOnceG3:
         :param str cookie_dir: User name for HPE XP disk array. Its recommended
             to create dedicated user with limited rights. It's a bad idea to
             use "arrayadmin" account.
+        :param int port: (optional) Custom port number for StoreOnce device.
         :return: None.
         """
         self._address = address
         self._user = user
         self._password = password
-        self._base_url = f'https://{address}/storeonceservices'
+        self._base_url = f'https://{address}:{port}/storeonceservices'
         LOG.debug('StoreOnce device base url = %s', self._base_url)
 
         # Default timeouts:
