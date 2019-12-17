@@ -2,8 +2,8 @@
 name: Bug report template
 about: Create a report to help us improve
 title: ''
-labels: '[BUG]'
-assignees: ''
+labels: 'BUG'
+assignees: 'IvanVSmirnov'
 
 ---
 
@@ -17,10 +17,11 @@ A clear and concise description of what you expected to happen.
 You app code with issue.
 
 **Python environment**
-Operation system version: [e.g. Centos Linux 7.6]
-Python language version: [e.g. 3.7]
-Python interpreter typew: [e.g. CPython, Cython, PyPy, ...]
-Python installed packages: ["# pip list" output]
+
+* Operation system version: [e.g. Centos Linux 7.6]
+* Python language version: [e.g. 3.7]
+* Python interpreter typew: [e.g. CPython, Cython, PyPy, ...]
+* Python installed packages: ["# pip list" output]
 
 **Trace log**
 Please enable hpestorapi debug log according documentation (see section "Debug" -> "Enable logging") and provide trace log.
