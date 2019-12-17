@@ -866,7 +866,8 @@ Five logging levels are used:
 * ERROR
 * FATAL
 
-Bug report
+Bug reports
 -------------------------------------
-Just mail me: Ivan Smirnov <ivan.smirnov@hpe.com>
+If you have found a bug, please create an `issue in GitHub <https://github.com/HewlettPackard/python-storage-clients/issues>`_.
+And do not hesitate to contact me: Ivan Smirnov <ivan.smirnov@hpe.com>
 
