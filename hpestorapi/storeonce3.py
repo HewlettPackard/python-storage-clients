@@ -22,13 +22,14 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
-import logging
-import pickle
-import os
-import warnings
-import socket
-from xml.etree import ElementTree as ETree
 import copy
+import logging
+import os
+import pickle
+import socket
+import warnings
+from xml.etree import ElementTree as ETree
+
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 

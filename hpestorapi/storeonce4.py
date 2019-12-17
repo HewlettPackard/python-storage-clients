@@ -23,10 +23,11 @@
 """
 
 import logging
+import os
+import pathlib
 import warnings
 from datetime import datetime
-import pathlib
-import os
+
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -40,6 +41,7 @@ class StoreOnceG4:
     """
         HPE StoreOnce Gen 4 backup device implementation class.
     """
+
     def __init__(self, address, username, password):
         """
         HPE StoreOnce Gen 4 disk backup constructor.
@@ -89,7 +91,7 @@ class StoreOnceG4:
                 resp = session.send(prep, timeout=timeout, verify=verify)
                 delta = datetime.now() - start
                 deltafmt = '%d.%d sec' % (delta.seconds,
-                                          delta.microseconds//1000)
+                                          delta.microseconds // 1000)
             except Exception as error:
                 LOG.fatal('Cannot connect to StoreOnce device. %s',
                           error)
@@ -114,9 +116,9 @@ class StoreOnceG4:
             if resp.content:
                 LOG.warning('Cannot decode JSON. Source string: %s',
                             resp.content)
-            return (resp.status_code, None)
+            return resp.status_code, None
 
-        return (resp.status_code, jdata)    # success = True, data = json
+        return resp.status_code, jdata  # success = True, data = json
 
     def open(self, verify=False):
         """

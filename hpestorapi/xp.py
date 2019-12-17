@@ -24,6 +24,7 @@
 
 import logging
 import warnings
+
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -122,9 +123,9 @@ class ConfManager:
             if resp.content:
                 LOG.warning('Cannot decode JSON. Source string: %s',
                             resp.content)
-            return (resp.status_code, None)
+            return resp.status_code, None
 
-        return (resp.status_code, jdata)    # success = True, data = json
+        return resp.status_code, jdata  # success = True, data = json
 
     def _set_timeout(self, timeout):
         self._http_timeout = timeout
@@ -137,7 +138,6 @@ class ConfManager:
         return self._http_timeout
 
     http_timeout = property(_get_timeout, _set_timeout)
-
 
 
 class CommandViewAE(ConfManager):
@@ -257,7 +257,7 @@ class Xp(ConfManager):
         self._base_url = '{base}/v1/objects/storages/{dev}'.format(
             base=self._base_url,
             dev=self._dev
-            )
+        )
         LOG.debug('Storage device base url = %s', self._base_url)
 
     def __del__(self):
@@ -275,7 +275,7 @@ class Xp(ConfManager):
         status, data = self.post(
             'sessions',
             auth=(self._username, self._password)
-            )
+        )
         if status == requests.codes.ok:
             # Session succefully opened
             LOG.info('Access token and session ID succefully received for '
@@ -461,7 +461,7 @@ class Xp(ConfManager):
 
         # If provided token is timed out
         if (status == requests.codes.unauthorized) and \
-           (data.get('messageId') == 'KART40047-E'):
+                (data.get('messageId') == 'KART40047-E'):
             LOG.info('Looks like current access token and session are '
                      ' expired. Session ID:%s, Serial Number:%s',
                      self._session['id'],
