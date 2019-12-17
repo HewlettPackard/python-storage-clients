@@ -80,18 +80,11 @@ class StoreServ:
             }
 
         # Generate static part of URL
-        if port is not None:
-            # Use custom user-defined port
-            if ssl:
-                self._base_url = f'https://{address}:{port}/api/v1'
-            else:
-                self._base_url = f'http://{address}:{port}/api/v1'
-        else:
-            # Use default port number
-            if ssl:
-                self._base_url = f'https://{address}:8080/api/v1'
-            else:
-                self._base_url = f'http://{address}:8008/api/v1'
+        proto = 'https' if ssl else 'http'
+        if port is None:
+            port = 8080 if ssl else 8008
+        self._base_url = f'{proto}://{address}:{port}/api/v1'
+        LOG.debug('StoreServ device base url = %s', self._base_url)
 
     def __del__(self):
         if self._key is not None:
