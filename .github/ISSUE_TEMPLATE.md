@@ -17,6 +17,7 @@ A clear and concise description of what you expected to happen.
 You app code with issue.
 
 **Python environment**
+Operation system version: [e.g. Centos Linux 7.6]
 Python language version: [e.g. 3.7]
 Python interpreter typew: [e.g. CPython, Cython, PyPy, ...]
 Python installed packages: ["# pip list" output]
