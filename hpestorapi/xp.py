@@ -57,7 +57,7 @@ class ConfManager:
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f'<class hperest.{class_name}(address={self.cvae_addr})>'
+        return f'<class hpestorapi.{class_name}(address={self.cvae_addr})>'
 
     def _query(self, url, method, **kwargs):
         # Copy allowed args to options dict
@@ -478,7 +478,7 @@ class Xp(ConfManager):
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f'<class hperest.{class_name}(dev={self._dev})>'
+        return f'<class hpestorapi.{class_name}(dev={self._dev})>'
 
 
 class AuthError(Exception):
