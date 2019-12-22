@@ -15,6 +15,7 @@ Version 0.9.5 (Dec 15, 2019)
 General improvements:
 
 * Package is ready for upload to Python Package Index (pypi)
+* HPE Primera disk arrays support
 
 Unit tests improvements:
 
