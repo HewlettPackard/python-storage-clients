@@ -21,7 +21,6 @@
 
 from setuptools import setup
 
-
 setup(
     name='hpestorapi',
     version='0.9.6',
@@ -37,7 +36,7 @@ setup(
     long_description_content_type='text/x-rst',
     python_requires='>=3.6',
     install_requires=['requests>=2.22.0'],
-    keywords=['HPE', 'REST', 'StoreOnce', '3PAR', 'XP7', 'Command View AE', 'Disk array'],
+    keywords=['HPE', 'REST', 'StoreOnce', '3PAR', 'Primera', 'XP7', 'Command View AE', 'Disk array'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
