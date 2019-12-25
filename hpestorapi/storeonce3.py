@@ -43,17 +43,6 @@ class StoreOnceG3:
     """
         HPE StoreOnce Gen 3 disk backup device implementation class.
     """
-    def set_timeout(self, timeout):
-        self._timeout = timeout
-
-    def get_timeout(self):
-        if hasattr(self, '_timeout'):
-            return self._timeout
-
-        # Default HTTP timeout = 15 sec
-        return 15
-
-    http_timeout = property(get_timeout, set_timeout)
 
     def __init__(self, address, user, password, cookie_dir=None, port=443):
         """
@@ -124,9 +113,9 @@ class StoreOnceG3:
 
         # By default SSL cert checking is disabled
         certcheck = kwargs.get('verify', False)
-
-        # Set connection timeout
-        respwait = kwargs.get('timeout', self.http_timeout)
+        
+        # Set connection and read timeout (if not set by user)
+        timeout = kwargs.pop('timeout', self.timeout)
 
         # Prepare request
         path = '%s/%s/' % (self._base_url, f'{url}'.strip('/'))
@@ -134,14 +123,14 @@ class StoreOnceG3:
         request = requests.Request(method, path, **option)
         prepped = session.prepare_request(request)
         resp = requests.Response()
-        LOG.debug('%s("%s", timeouts=%s)', method, path, respwait)
+        LOG.debug('%s("%s", timeouts=%s)', method, path, timeout)
 
         # Perform request
         with warnings.catch_warnings():
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 resp = session.send(prepped, verify=certcheck,
-                                    timeout=respwait)
+                                    timeout=timeout)
             except Exception as error:
                 LOG.fatal(error)
                 raise error
@@ -303,6 +292,30 @@ class StoreOnceG3:
 
     def iterate(self, url, items):
         return Iterator(self, url, items)
+    
+    def _set_timeout(self, timeout):
+        if isinstance(timeout, (float, int)):
+            self._timeout = (timeout, timeout)
+        elif isinstance(timeout, tuple):
+            self._timeout = timeout
+
+    def _get_timeout(self):
+        return self._timeout
+
+    timeout = property(_get_timeout, _set_timeout)
+    """
+        :var float|tuple timeout: Number of seconds that Rest API
+            client waits for response from HPE StoreOnce Gen 3
+            before timeout exception generation. You can use
+            different timeouts for connection setup and for getting
+            first piece of data. In this case, you should use
+            tuple(float, float) with first value - connection
+            timeout and the second value - read timeout. Or if
+            you want to use same values for both type of timeouts,
+            you can use one float value. 'None' value can be used
+            instead to wait forever for a device response. Default
+            value: (1, None).
+    """
 
     def __enter__(self):
         return self
