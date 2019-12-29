@@ -64,6 +64,8 @@ class StoreServ:
         self._address = address
         self._username = username
         self._password = password
+        self._verify = ssl
+        self._port = port
 
         # Session key. None, if there is not active session.
         self._key = None
@@ -73,19 +75,11 @@ class StoreServ:
         # ReadTimeout = infinity
         self._timeout = (1, None)
 
-        self._verify = ssl
         self._headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Accept-Language': 'en'
         }
-
-        # Generate static part of URL
-        proto = 'https' if ssl else 'http'
-        if port is None:
-            port = 8080 if ssl else 8008
-        self._base_url = f'{proto}://{address}:{port}/api/v1'
-        LOG.debug('StoreServ device base url = %s', self._base_url)
 
     def __del__(self):
         if self._key is not None:
@@ -279,7 +273,7 @@ class StoreServ:
             url: 'system' or 'volumes'. All available url's, request
             parameters and results are described in "HPE 3PAR Web Services API
             Developer's Guide"
-        :rtype: tuple(int, dict)
+        с
         :return: Tuple with HTTP status code and dict with request result. For
             example: (200, {'key':'value'}). Second value may be None if 3PAR
             array returns no message body.
@@ -326,6 +320,25 @@ class StoreServ:
             instead to wait forever for a device response. Default
             value: (1, None)
     """
+
+    @property
+    def _base_url(self):
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        # URL Protocol
+        proto = 'https' if self._verify else 'http'
+
+        # Device port number
+        if self._port is None:
+            port = 8080 if self._verify else 8008
+        else:
+            port = self._port
+            
+        return f'{proto}://{self._address}:{port}/api/v1'
 
     def __enter__(self):
         return self
