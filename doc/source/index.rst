@@ -314,6 +314,20 @@ Exception handling example:
       # safely analyze array response (status and data variables)
       # ...
 
+HPE 3PAR Primera disk array
+====================================
+
+API reference
+-------------------------------------
+.. autoclass:: hpestorapi.Primera
+    :members:
+    :undoc-members:
+
+Usage
+------------------------------------
+TODO
+
+
 HPE XP7 and P9500 disk array
 ====================================
 
