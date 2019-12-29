@@ -24,3 +24,4 @@ from .storeonce3 import StoreOnceG3
 from .storeonce4 import StoreOnceG4
 from .xp import Xp
 from .xp import CommandViewAE
+from .primera import Primera
