@@ -47,11 +47,7 @@ class Primera(StoreServ):
         # URL Protocol
         proto = 'https' if self._verify else 'http'
 
-        # Device port number
-        if self._port is None:
-            #port = 8080 if self._verify else 8008
-            port = 443
-        else:
-            port = self._port
+        # Device port number (default WSAPI port is 443)
+        port = self._port or 443
 
         return f'{proto}://{self._address}:{port}/api/v1'
