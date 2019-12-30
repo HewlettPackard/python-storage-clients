@@ -23,6 +23,7 @@
 """
 
 import logging
+
 from . import StoreServ
 
 if __name__ == "__main__":
@@ -45,7 +46,7 @@ class Primera(StoreServ):
         :return: Static part of URL
         """
         # URL Protocol
-        proto = 'https' if self._verify else 'http'
+        proto = 'https' if self._ssl else 'http'
 
         # Device port number (default WSAPI port is 443)
         port = self._port or 443

@@ -64,7 +64,7 @@ class StoreServ:
         self._address = address
         self._username = username
         self._password = password
-        self._verify = ssl
+        self._ssl = ssl
         self._port = port
 
         # Session key. None, if there is not active session.
@@ -99,7 +99,7 @@ class StoreServ:
             Second value may be None if 3PAR array returns no message body,
         """
         # Set SSL cert checking
-        verify = kwargs.pop('verify', self._verify)
+        verify = kwargs.pop('verify', self._ssl)
 
         # Set connection and read timeout (if not set by user)
         timeout = kwargs.pop('timeout', self._timeout)
@@ -330,11 +330,11 @@ class StoreServ:
         :return: Static part of URL
         """
         # URL Protocol
-        proto = 'https' if self._verify else 'http'
+        proto = 'https' if self._ssl else 'http'
 
         # Device port number
         if self._port is None:
-            port = 8080 if self._verify else 8008
+            port = 8080 if self._ssl else 8008
         else:
             port = self._port
             
