@@ -15,7 +15,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
-
+from setup import VERSION
 
 # -- Project information -----------------------------------------------------
 
@@ -24,9 +24,9 @@ copyright = '2017-2020, HPE Pointnext DACH & Russia'
 author = 'Ivan Smirnov'
 
 # The short X.Y version
-version = '0.9.6'
+version = VERSION
 # The full version, including alpha/beta/rc tags
-release = '0.9.6'
+release = VERSION
 
 
 # -- General configuration ---------------------------------------------------

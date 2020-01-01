@@ -21,9 +21,11 @@
 
 from setuptools import setup
 
+VERSION = '0.9.6'
+
 setup(
     name='hpestorapi',
-    version='0.9.6',
+    version=VERSION,
     packages=['hpestorapi'],
     url='https://github.com/HewlettPackard/python-storage-clients',
     license='Apache License 2.0',
@@ -35,7 +37,7 @@ setup(
     long_description=open('README.rst').read(),
     long_description_content_type='text/x-rst',
     python_requires='>=3.6',
-    install_requires=['requests>=2.22.0'],
+    install_requires=['requests>=2.19.1'],
     keywords=['HPE', 'REST', 'StoreOnce', '3PAR', 'Primera', 'XP7', 'Command View AE', 'Disk array'],
     classifiers=[
         'Development Status :: 4 - Beta',
