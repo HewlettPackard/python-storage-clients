@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'hpestorapi'
-copyright = '2017, HPE Pointnext DACH & Russia'
+copyright = '2017-2020, HPE Pointnext DACH & Russia'
 author = 'Ivan Smirnov'
 
 # The short X.Y version
