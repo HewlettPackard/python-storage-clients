@@ -314,18 +314,11 @@ Exception handling example:
       # safely analyze array response (status and data variables)
       # ...
 
-HPE 3PAR Primera disk array
+HPE Primera disk array
 ====================================
-
-API reference
--------------------------------------
-.. autoclass:: hpestorapi.Primera
-    :members:
-    :undoc-members:
-
-Usage
-------------------------------------
-TODO
+HPE Primera has minimal WSAPI changes compared to HPE 3PAR. To use
+Primera WSAPI you should use class :class:`hpestorapi.Primera` with
+an interface similar to class:`hpestorapi.StoreServ`
 
 
 HPE XP7 and P9500 disk array
