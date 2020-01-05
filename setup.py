@@ -19,7 +19,10 @@
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
+import os
 from setuptools import setup
+
+ROOT_DIR = os.path.dirname(__file__)
 
 VERSION = '0.9.6'
 
@@ -34,7 +37,7 @@ setup(
     description=('Python library that provides very simple way to use '
                  'Rest API services for HPE storage and disk backup '
                  'devices'),
-    long_description=open('README.rst').read(),
+    long_description=open(os.path.join(ROOT_DIR, 'README.rst')).read(),
     long_description_content_type='text/x-rst',
     python_requires='>=3.6',
     install_requires=['requests>=2.19.1'],
