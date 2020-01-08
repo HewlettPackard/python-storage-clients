@@ -14,8 +14,8 @@
 #
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('../../'))
-from setup import VERSION
 
 # -- Project information -----------------------------------------------------
 
@@ -24,9 +24,9 @@ copyright = '2017-2020, HPE Pointnext DACH & Russia'
 author = 'Ivan Smirnov'
 
 # The short X.Y version
-version = VERSION
+version = '0.9.6'
 # The full version, including alpha/beta/rc tags
-release = VERSION
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -110,7 +110,7 @@ html_static_path = ['.static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'hpestorapi'
+htmlhelp_basename = project
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -138,8 +138,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'hpestorapi-{rev}{ext}'.format(rev=release, ext='.tex'), 'hpestorapi python library manual',
-     'Hewlett Packard Enterprise Development', 'manual'),
+    (master_doc, f'{project}-{release}.tex', f'{project} python library manual', 'Hewlett Packard Enterprise Development', 'manual'),
 ]
 
 
@@ -148,8 +147,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'hpestorapi', 'hpestorapi library reference guide',
-     [author], 1)
+    (master_doc, project, f'{project} library reference guide', [author], 1)
 ]
 
 
@@ -159,8 +157,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'hpestorapi', 'hpestorapi library reference guide',
-     author, 'hpestorapi', 'One line description of project.',
+    (master_doc, project, f'{project} library reference guide',
+     author, project, 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -187,8 +185,7 @@ epub_exclude_files = ['search.html']
 
 autodoc_member_order = 'bysource'
 autodoc_default_options = {
-	'member-order': 'bysource',
-	'special-members': '__init__',
-	'autodoc_inherit_docstrings': False
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'autodoc_inherit_docstrings': False
 }
-
