@@ -10,10 +10,10 @@ API services for HPE storage and disk backup devices. Current version
 supports:
 
 * HPE 3PAR StoreServ disk arrays
+* HPE Primera disk arrays
 * HPE XP7 and P9500 (Command View AE Configuration manager is required)
 * HPE StoreOnce G3 disk backup device
 * HPE StoreOnce G4 disk backup device
-* HPE Primera disk arrays
 
 Installation
 ========================================================================
@@ -23,7 +23,7 @@ Requirements
 hpestorapi library depends on:
 
 * Python 3.6 or newer
-* Python `requests library <http://python-requests.org>`_ version >= 2.19.1
+* Python `requests library <http://python-requests.org>`_
 
 Install from PyPI
 --------------------------------------------------------------------------
