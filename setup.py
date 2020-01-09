@@ -20,10 +20,10 @@
 """
 
 from setuptools import setup
-from doc.source import conf
+from doc.source.conf import project, version
 
 setup(
-    name=conf.project,
-    packages=[conf.project],
-    version=conf.version,
+    name=project,
+    packages=[project],
+    version=version,
 )
