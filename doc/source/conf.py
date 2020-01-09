@@ -15,6 +15,7 @@
 import os
 import sys
 
+# Path to project package
 sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------

@@ -24,5 +24,6 @@ from doc.source import conf
 
 setup(
     name=conf.project,
+    packages=[conf.project],
     version=conf.version,
 )
