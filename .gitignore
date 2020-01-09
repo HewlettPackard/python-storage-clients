@@ -1,5 +1,5 @@
 # Python bytecode and cache
-*.pyc
+*.py[cod]
 __pycache__/
 
 # Setuptool data
