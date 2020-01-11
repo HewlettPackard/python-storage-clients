@@ -68,3 +68,7 @@ You should install docker prior to running tests. To run all unit tests:
     # docker build -t storeserv test/storeserv
     # docker build -t storeonce3 test/storeonce3
     # tox
+
+License
+========================================================================
+This project is licensed under the Apache 2.0 license.
