@@ -53,7 +53,6 @@ Import hpestorapi library in your python script:
 
     import hpestorapi
 
-
 Usage example
 ========================================================================
 
@@ -62,24 +61,14 @@ Usage example
   from hpestorapi import StoreServ
 
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
-    try:
-      array.open():
-      status, data = array.get('system')
-    except Exception as error:
-      print ('Something went wrong:')
-      raise error
-    else:
-      if status == 200:
-        print('Name=%s; SerialNumber=%s; Address=%s' % (
-              data['name'],
-              data['serialNumber'],
-              data['IPv4Addr'])
-             )
+    array.open():
+    status, data = array.get('system')
+    if status == 200:
+      print(f'Name={data["name"]}, SerialNumber={data["serialNumber"]}, Address={data["IPv4Addr"]}
 
 Documentation
 ========================================================================
-The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_
-
+The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.6.pdf>`_
 
 Unit Tests
 ========================================================================
