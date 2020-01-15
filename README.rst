@@ -58,13 +58,16 @@ Usage example
 
 ::
 
-  from hpestorapi import StoreServ
+    from hpestorapi import StoreServ
 
-  with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
-    array.open()
-    status, data = array.get('system')
-    if status == 200:
-      print(f'Name={data["name"]}, SerialNumber={data["serialNumber"]}, Address={data["IPv4Addr"]}
+    with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
+        array.open()
+        status, data = array.get('system')
+        if status == 200:
+            print(f'Name={data["name"]},'
+                  f'SerialNumber={data["serialNumber"]},'
+                  f'Address={data["IPv4Addr"]}'
+                  )
 
 Documentation
 ========================================================================
