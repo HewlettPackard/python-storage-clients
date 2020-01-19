@@ -14,7 +14,6 @@ supports:
 * HPE Primera disk arrays
 
 
-
 .. toctree::
    :maxdepth: 4
    :caption: Contents:
@@ -56,36 +55,6 @@ Import hpestorapi library in your python script:
     # -*- coding: utf-8 -*-
 
     import hpestorapi
-
-
-Unit Tests
-========================================================================
-To run all unit tests:
-::
-
-    # pip install -r requirements/development.txt
-    # docker build -t storeserv test/storeserv
-    # docker build -t storeonce3 test/storeonce3
-    # tox
-
-
-Documentation
-====================================
-The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.5.pdf>`_
-
-
-
-Import hpestorapi library in your python script:
-
-.. highlight:: py
-
-:: 
-
-    #!/usr/bin/env python3
-    # -*- coding: utf-8 -*-
-
-    import hpestorapi
-    # ...
     
 
 HPE 3PAR StoreServ disk array
