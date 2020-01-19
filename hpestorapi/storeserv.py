@@ -273,7 +273,6 @@ class StoreServ:
             url: 'system' or 'volumes'. All available url's, request
             parameters and results are described in "HPE 3PAR Web Services API
             Developer's Guide"
-        с
         :return: Tuple with HTTP status code and dict with request result. For
             example: (200, {'key':'value'}). Second value may be None if 3PAR
             array returns no message body.
