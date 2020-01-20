@@ -83,16 +83,6 @@ You should install docker prior to running tests. To run all unit tests:
     # docker build -t storeonce3 test/storeonce3
     # tox
 
-How to contribute
-========================================================================
-
-* Fork the repository on Github
-* Create a named feature branch
-* Write your change
-* Write tests for your change (if applicable)
-* Run the tests, ensuring they all pass
-* Submit a Pull Request using Github
-
 
 License
 ========================================================================
