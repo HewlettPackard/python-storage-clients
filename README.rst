@@ -71,7 +71,7 @@ Usage example
 
 Documentation
 ========================================================================
-The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.6.pdf>`_
+The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.7.pdf>`_
 
 Unit Tests
 ========================================================================
