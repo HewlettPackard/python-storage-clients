@@ -131,24 +131,24 @@ class StoreOnceG3:
             try:
                 resp = session.send(prepped, verify=certcheck,
                                     timeout=timeout)
+                deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
+                                          resp.elapsed.microseconds // 1000)
             except Exception as error:
                 LOG.fatal(error)
                 raise error
 
+        LOG.debug('StoreOnce return status %s, delay %s',
+                  resp.status_code,
+                  deltafmt)
+
         # Check Rest service response
-        if resp.status_code == requests.codes.ok:
-            LOG.debug('Url = "%s"', resp.url)
-            LOG.debug('Rest service return http code 200 (OK)')
-        elif resp.status_code == requests.codes.unauthorized:
-            LOG.debug('Url = "%s"', resp.url)
-            LOG.debug('Rest service return http code 401 (Unauthorized)')
+        if resp.status_code == requests.codes.unauthorized:
             # Replay last query
             if self._is_expired(resp):
                 if self.open(cookie_load=False):
                     return self.query(url, method, **kwargs)
         else:
             LOG.warning('resp.url=%s', resp.url)
-            LOG.warning('Rest service return http code %s', resp.status_code)
             LOG.warning('resp.content=%s', resp.content)
             LOG.warning('resp.reason=%s', resp.reason)
 
