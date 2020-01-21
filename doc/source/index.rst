@@ -8,10 +8,10 @@ API services for HPE storage and disk backup devices. Current version
 supports:
 
 * HPE 3PAR StoreServ disk arrays
+* HPE Primera disk arrays
 * HPE XP7 and P9500 (Command View AE Configuration manager is required)
 * HPE StoreOnce Gen 3 disk backup device
 * HPE StoreOnce Gen 4 disk backup device
-* HPE Primera disk arrays
 
 
 .. toctree::
