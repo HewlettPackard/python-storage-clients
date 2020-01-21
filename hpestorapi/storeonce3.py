@@ -74,8 +74,8 @@ class StoreOnceG3:
         # Get cookile file path
         if cookie_dir is not None:
             if os.path.isdir(cookie_dir):
-                ip = socket.gethostbyname(self._address.strip())
-                self._cookie_file = f'{cookie_dir}/{ip}.cookie'
+                ip_addr = socket.gethostbyname(self._address.strip())
+                self._cookie_file = f'{cookie_dir}/{ip_addr}.cookie'
                 LOG.debug('Cookie filename:%s', self._cookie_file)
             else:
                 LOG.warning('Cookie directory is not available. Path: %s',
@@ -113,7 +113,7 @@ class StoreOnceG3:
 
         # By default SSL cert checking is disabled
         certcheck = kwargs.get('verify', False)
-        
+
         # Set connection and read timeout (if not set by user)
         timeout = kwargs.pop('timeout', self.timeout)
 
@@ -292,7 +292,7 @@ class StoreOnceG3:
 
     def iterate(self, url, items):
         return Iterator(self, url, items)
-    
+
     def _set_timeout(self, timeout):
         if isinstance(timeout, (float, int)):
             self._timeout = (timeout, timeout)
