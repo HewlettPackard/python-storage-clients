@@ -26,7 +26,6 @@ import logging
 import os
 import pathlib
 import warnings
-from datetime import datetime
 
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -87,11 +86,9 @@ class StoreOnceG4:
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 session = requests.Session()
-                start = datetime.now()
                 resp = session.send(prep, timeout=timeout, verify=verify)
-                delta = datetime.now() - start
-                deltafmt = '%d.%d sec' % (delta.seconds,
-                                          delta.microseconds // 1000)
+                deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
+                                          resp.elapsed.microseconds // 1000)
             except Exception as error:
                 LOG.fatal('Cannot connect to StoreOnce device. %s',
                           error)
