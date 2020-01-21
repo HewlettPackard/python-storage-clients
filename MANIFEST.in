@@ -1,3 +1,4 @@
 include LICENSE.txt
 include CHANGELOG.rst
 include CONTRIBUTING.rst
+include doc/source/conf.py
