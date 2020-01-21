@@ -73,6 +73,10 @@ Documentation
 ========================================================================
 The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.7.pdf>`_
 
+Issues
+========================================================================
+If you encounter any problems, please `open an issue <https://github.com/HewlettPackard/python-storage-clients/issues>`_ along with a detailed description.
+
 Unit Tests
 ========================================================================
 You should install docker prior to running tests. To run all unit tests:
@@ -84,6 +88,4 @@ You should install docker prior to running tests. To run all unit tests:
     # tox
 
 
-License
-========================================================================
-This project is licensed under the Apache 2.0 license.
+
