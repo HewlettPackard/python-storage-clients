@@ -40,7 +40,7 @@ Get a copy of source code
     # git clone https://github.com/HewlettPackard/python-storage-clients.git
     # cd python-storage-clients
 
-Install package with dependencies:
+Install the package with dependencies:
 ::
 
     # python setup.py install
