@@ -28,13 +28,15 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .interface import BaseAPI
+
 if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.storeserv')
 
 
-class StoreServ:
+class StoreServ(BaseAPI):
     """
         HPE 3PAR array implementation class.
     """
