@@ -53,3 +53,13 @@ class BaseAPI(ABC):
         :return: None
         """
         raise NotImplementedError
+
+    @abstractmethod
+    def get(self, url, **kwargs):
+        """
+        Perform HTTP GET request to device. Method used to get
+        information about objects.
+
+        :param str url: Relative URL address.
+        """
+        raise NotImplementedError
