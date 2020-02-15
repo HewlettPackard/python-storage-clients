@@ -106,7 +106,7 @@ Simple GET request usage. This code print some storage system information
 
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
     try:
-      array.open():
+      array.open()
       status, data = array.get('system')
     except Exception as error:
       print ('Something went wrong:')
@@ -132,7 +132,7 @@ Groups names beggining with "dfs".
 
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
     try:
-      array.open():
+      array.open()
       status, data = array.get('remotecopygroups',
                                query='name LIKE <dfs*>')
     except Exception as error:
@@ -163,7 +163,7 @@ This code will create new host on the 3PAR array:
 
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
     try:
-      array.open():
+      array.open()
       status, data = array.post('hosts', newhost)
     except Exception as error:
       print ('Something went wrong:')
@@ -188,7 +188,7 @@ This code will delete host from 3PAR array:
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
     hostname = 'restapi-test'
     try:
-      array.open():
+      array.open()
       status, data = array.delete(f'hosts/{hostname}')
     except Exception as error:
       print ('Something went wrong:')
@@ -220,7 +220,7 @@ location description):
 
   with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
     try:
-      array.open():
+      array.open()
       status, data = array.put(f'hosts/{hostname}', body=modify)
     except Exception as error:
       print ('Something went wrong:')
