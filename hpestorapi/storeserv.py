@@ -243,7 +243,7 @@ class StoreServ(BaseAPI):
         """
         # Perform get request with query filter
         if query is not None:
-            return self._query(url, 'GET', json={'query': query})
+            return self._query(url, 'GET', params={'query': query})
 
         # Perform simple get request
         return self._query(url, 'GET')
