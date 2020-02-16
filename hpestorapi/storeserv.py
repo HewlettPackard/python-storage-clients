@@ -112,9 +112,9 @@ class StoreServ(BaseAPI):
 
         # Prepare request
         path = '%s/%s' % (self._base_url, url.strip('/'))
-        LOG.debug('%s(`%s`)', method, path)
         request = requests.Request(method, path, **kwargs)
         prep = request.prepare()
+        LOG.debug('%s(`%s`)', method, prep.url)
 
         # Perform request with runtime measuring
         with warnings.catch_warnings():
