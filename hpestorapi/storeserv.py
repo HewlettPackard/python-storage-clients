@@ -25,6 +25,7 @@
 import logging
 import warnings
 
+from urllib.parse import quote
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -115,13 +116,14 @@ class StoreServ(BaseAPI):
         request = requests.Request(method, path, **kwargs)
         prep = request.prepare()
         LOG.debug('%s(`%s`)', method, prep.url)
+        LOG.debug('Request body = `%s`', prep.body)
 
         # Perform request with runtime measuring
         with warnings.catch_warnings():
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 session = requests.Session()
-                resp = session.send(prep, timeout=timeout, verify=verify)
+                resp = session.send(prep, timeout=timeout, verify=False)
                 deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
                                           resp.elapsed.microseconds // 1000)
             except Exception as error:
@@ -243,7 +245,7 @@ class StoreServ(BaseAPI):
         """
         # Perform get request with query filter
         if query is not None:
-            return self._query(url, 'GET', params={'query': query})
+            return self._query(url, 'GET', params=quote(f'query="{query}"'))
 
         # Perform simple get request
         return self._query(url, 'GET')
