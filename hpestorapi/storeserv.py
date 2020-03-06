@@ -42,7 +42,8 @@ class StoreServ(BaseAPI):
         HPE 3PAR array implementation class.
     """
 
-    def __init__(self, address, username, password, ssl=True, port=None):
+    def __init__(self, address, username, password, port=None,
+                 ssl=True, verify=True, cert=None):
         """
         HPE 3PAR constructor.
 
@@ -58,17 +59,25 @@ class StoreServ(BaseAPI):
             its a bad idea. To create new user, you should check 3PAR OS
             command: createuser.
         :param str password: Password for 3PAR Web Services API.
-        :param bool ssl: (optional) Use secure https (True) or plain text
-            http (False).
         :param int port: (optional) Custom port number for 3PAR Web Services
             API.
+        :param bool ssl: (optional) Use secure https (True) or plain text
+            http (False).
+        :param bool verify: (optional) Either a boolean, in which case it
+            controls whether we verify the Rest server’s TLS certificate,
+            or a string, in which case it must be a path to a CA
+            bundle to use. By default: True.
+        :param str cert: (optional)  String with path to ssl client
+            certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :return: None
         """
         self._address = address
         self._username = username
         self._password = password
-        self._ssl = ssl
         self._port = port
+        self._ssl = ssl
+        self._verify = verify
+        self._cert = cert
 
         # Session key. None, if there is not active session.
         self._key = None
@@ -78,6 +87,7 @@ class StoreServ(BaseAPI):
         # ReadTimeout = infinity
         self._timeout = (1, None)
 
+        # Default request headers
         self._headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -85,6 +95,7 @@ class StoreServ(BaseAPI):
         }
 
     def __del__(self):
+        # Perform session close
         if self._key is not None:
             self.close()
 
@@ -96,18 +107,17 @@ class StoreServ(BaseAPI):
             Static part of url is generated automatically.
         :param str method: HTTP method. Could be 'GET', 'POST', 'DELETE' or
             'PUT'.
+        :param float|tuple timeout: (optional) Like :attr:`StoreServ.timeout`
+            but only for one query.
         :rtype: tuple(int, dict)
         :return: Dictionary with HTTP status code and json data.
             For example: dict('status':200, 'data':{'key':'value'}).
             Second value may be None if 3PAR array returns no message body,
         """
-        # Set SSL cert checking
-        verify = kwargs.pop('verify', self._ssl)
-
-        # Set connection and read timeout (if not set by user)
+        # Set connection and read timeout (if not set by user for current request)
         timeout = kwargs.pop('timeout', self._timeout)
 
-        # Add standart and auth headers to parameter list
+        # Add default and auth headers to parameter list
         kwargs.setdefault('headers', dict())
         kwargs['headers'].update(self._headers)
 
@@ -123,7 +133,7 @@ class StoreServ(BaseAPI):
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 session = requests.Session()
-                resp = session.send(prep, timeout=timeout, verify=False)
+                resp = session.send(prep, timeout=timeout, verify=self._verify, cert=self._cert)
                 deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
                                           resp.elapsed.microseconds // 1000)
             except Exception as error:
