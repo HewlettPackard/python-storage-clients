@@ -74,7 +74,6 @@ class StoreServ(BaseAPI):
         self._port = port
         self._ssl = ssl
         self._verify = verify
-        self._cert = cert
 
         # Session key. None, if there is not active session.
         self._key = None
