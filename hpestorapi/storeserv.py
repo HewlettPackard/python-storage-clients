@@ -42,8 +42,7 @@ class StoreServ(BaseAPI):
         HPE 3PAR array implementation class.
     """
 
-    def __init__(self, address, username, password, port=None,
-                 ssl=True, verify=True, cert=None):
+    def __init__(self, address, username, password, port=None, ssl=True, verify=True):
         """
         HPE 3PAR constructor.
 
@@ -67,8 +66,6 @@ class StoreServ(BaseAPI):
             controls whether we verify the Rest server’s TLS certificate,
             or a string, in which case it must be a path to a CA
             bundle to use. By default: True.
-        :param str cert: (optional)  String with path to ssl client
-            certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :return: None
         """
         self._address = address
@@ -133,7 +130,7 @@ class StoreServ(BaseAPI):
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 session = requests.Session()
-                resp = session.send(prep, timeout=timeout, verify=self._verify, cert=self._cert)
+                resp = session.send(prep, timeout=timeout, verify=self._verify)
                 deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
                                           resp.elapsed.microseconds // 1000)
             except Exception as error:
