@@ -1,11 +1,16 @@
 Change Log
 ************************************************************************
 
-Version 0.9.7 (TBD)
+Version 0.9.7 (March 7, 2020)
 ========================================================================
 Internal improvements:
 
 * API interface fixation.
+
+Bug fixed:
+
+* 3PAR and Primera filter query string encoding bug.
+* Parameter verify added to 3PAR and Primera for self signed SSL certs support.
 
 Version 0.9.6 (Jan 20, 2020)
 ========================================================================
