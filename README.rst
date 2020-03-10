@@ -46,7 +46,8 @@ Install the package with dependencies:
     # python setup.py install
 
 Import hpestorapi library in your python script:
-::
+
+.. code:: python
 
     #!/usr/bin/env python3
     # -*- coding: utf-8 -*-
