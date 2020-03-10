@@ -75,9 +75,7 @@ Session management
 Simple way to open Rest API session for StoreServ 3PAR arrays (with
 exception handling and session auto-closing):
 
-.. highlight:: py
-
-:: 
+.. code:: python
 
     from hpestorapi import StoreServ
 
@@ -98,9 +96,7 @@ GET request
 Simple GET request usage. This code print some storage system information
 (name, serial number and ip address):
 
-.. highlight:: py
-
-:: 
+.. code:: python
 
     from hpestorapi import StoreServ
 
@@ -123,9 +119,7 @@ specifications are described in "HPE 3PAR Web Services API Developer's
 Guide" (see section "WSAPI query syntax"). This code print Remote Copy
 Groups names beggining with "dfs".
 
-.. highlight:: py
-
-:: 
+.. code:: python
     
     from hpestorapi import StoreServ
 
@@ -146,9 +140,7 @@ POST request
 
 This code will create new host on the 3PAR array:
 
-.. highlight:: py
-
-:: 
+.. code:: python
 
     from hpestorapi import StoreServ
 
@@ -178,9 +170,7 @@ DELETE request
 
 This code will delete host from 3PAR array:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     from hpestorapi import StoreServ
 
@@ -205,9 +195,7 @@ PUT request
 This code will modify host on 3PAR array (change host persona and
 location description):
 
-.. highlight:: py
-
-::
+.. code:: python
 
     from hpestorapi import StoreServ
 
@@ -251,9 +239,7 @@ List of method, that can raise exceptions:
 
 Exception handling example:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import requests
 
@@ -308,9 +294,7 @@ Session management
 
 Open Rest API session for XP array:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -330,9 +314,7 @@ GET request
 
 Simple GET request usage. This code print pool list from HPE XP array:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -358,9 +340,7 @@ POST request
 
 This code will create new ldev on the XP array:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -385,9 +365,7 @@ DELETE request
 
 This code will delete ldev 62:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -402,9 +380,7 @@ PUT request
 
 This code will change label for ldev 62:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -429,9 +405,7 @@ This code will change label for ldev 62:
 Exception handling
 ++++++++++++++++++++++++++++++++++++
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import requests
     import hpestorapi
@@ -480,9 +454,7 @@ Session management
 
 Open Rest API session for StoreOnce Gen 4 disk backup device:
 
-.. highlight:: py
-
-::
+.. code:: python
     
     import hpestorapi
 
@@ -501,9 +473,7 @@ GET request
 
 Simple GET request usage. This code print StoreOnce G3 Catalyst Stores:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import xml.etree.ElementTree
     import hpestorapi
@@ -528,9 +498,7 @@ POST request
 
 POST request usage. This code activate license for StoreOnce G3:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -556,9 +524,7 @@ DELETE request
 
 This code remove from Service Set 1 Catalyst Store 0:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -586,9 +552,7 @@ PUT request
 
 This code add NTP server to StoreOnce G3 configuration:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -616,9 +580,7 @@ Iterate multipage objects
 
 This code print all Catalyst items from all Catalyst stores:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     from hpestorapi import StoreOnceG3
     from hpestorapi.storeonce3 import Iterator
@@ -679,9 +641,7 @@ Session management
 
 Open Rest API session for StoreOnce Gen 4 disk backup device:
 
-.. highlight:: py
-
-::
+.. code:: python
     
     import hpestorapi
 
@@ -701,9 +661,7 @@ GET request
 
 Simple GET request usage. This code print StoreOnce G4 groups:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -725,9 +683,7 @@ POST request
 
 This code will create new Catalyst client:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -753,9 +709,7 @@ DELETE request
 
 This code remove CIFS share:
 
-.. highlight:: py
-
-::
+.. code:: python
 
     import hpestorapi
 
@@ -781,9 +735,7 @@ PUT request
 
 This code will update current SMTP configuration:
 
-.. highlight:: py
-
-::
+.. code:: python
     
     import hpestorapi
 
@@ -815,9 +767,7 @@ hpestorapi uses Python’s Standard Library `logging module
 <https://docs.python.org/3/library/logging.html>`_. Simple python script
 with enabled debug logging:
 
-.. highlight:: py
-
-::
+.. code:: python
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-

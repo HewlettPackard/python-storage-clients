@@ -56,7 +56,7 @@ Import hpestorapi library in your python script:
 Usage example
 ========================================================================
 
-::
+.. code:: python
 
     from hpestorapi import StoreServ
 
