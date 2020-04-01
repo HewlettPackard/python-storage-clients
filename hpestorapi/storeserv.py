@@ -62,7 +62,7 @@ class StoreServ(BaseAPI):
             API.
         :param bool ssl: (optional) Use secure https (True) or plain text
             http (False).
-        :param bool verify: (optional) Either a boolean, in which case it
+        :param bool|string verify: (optional) Either a boolean, in which case it
             controls whether we verify the Rest server’s TLS certificate,
             or a string, in which case it must be a path to a CA
             bundle to use. By default: True.
