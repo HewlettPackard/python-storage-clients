@@ -24,7 +24,7 @@
 
 import logging
 
-from . import StoreServ
+from hpestorapi import StoreServ
 
 if __name__ == "__main__":
     pass
