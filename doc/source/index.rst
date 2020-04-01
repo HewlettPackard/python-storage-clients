@@ -356,9 +356,9 @@ This code will create new ldev on the XP array:
             raise error
         else:
             if status == 200:
-                print("Success")
+                print('Success')
             else:
-                print("Cannot create ldev")
+                print('Cannot create ldev')
 
 DELETE request
 ++++++++++++++++++++++++++++++++++++
@@ -369,10 +369,21 @@ This code will delete ldev 62:
 
     import hpestorapi
 
+    ldevid=62
+
     array = hpestorapi.Xp('cvae.domain.com', 'svp.domain.com', '123456',
-                          'arrayuser', 'arraypassword')
-    if array.open():
-        ldevid = 62
+                          'arrayuser', 'arraypassword') as array:
+        try:
+            array.open()
+            status, body = array.post(f'ldevs/62')
+        except Exception as error:
+            print('Something went wrong:')
+            raise error
+        else:
+            if status == 200:
+                print('Success')
+            else:
+                print(f'Cannot delete ldev with id {ldevid}')
 
 
 PUT request
@@ -397,9 +408,9 @@ This code will change label for ldev 62:
             raise error
         else:
             if status == 200:
-                print("Success")
+                print('Success')
             else:
-                print("Cannot create ldev")
+                print('Cannot create ldev')
 
 
 Exception handling
@@ -688,8 +699,8 @@ This code will create new Catalyst client:
     import hpestorapi
 
     with hpestorapi.StoreOnceG4('10.0.0.1', 'Admin', 'password') as so:
-        new_client = {'name': 'sqlserver', 'description': "New host',
-                      'password': "secretpass'
+        new_client = {'name': 'sqlserver', 'description': 'New host',
+                      'password': 'secretpass'
         }
         try:
             so.open()
