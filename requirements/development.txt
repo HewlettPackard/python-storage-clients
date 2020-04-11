@@ -1,6 +1,6 @@
 -r runtime.txt
-Sphinx==2.1.2
-pylint==2.3.1
+Sphinx==3.0.1
+pylint==2.4.4
 pylama==7.7.1
-tox==3.14.2
+tox==3.14.6
 tox-docker==1.4.1
