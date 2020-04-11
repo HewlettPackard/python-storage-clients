@@ -29,7 +29,6 @@ from urllib.parse import quote
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .interface import BaseAPI
 
 if __name__ == "__main__":
     pass
@@ -37,7 +36,7 @@ if __name__ == "__main__":
 LOG = logging.getLogger('hpestorapi.storeserv')
 
 
-class StoreServ(BaseAPI):
+class StoreServ:
     """
         HPE 3PAR array implementation class.
     """
