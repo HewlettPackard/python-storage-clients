@@ -780,31 +780,31 @@ with enabled debug logging:
 
 .. code:: python
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+    #!/usr/bin/env python3
+    # -*- coding: utf-8 -*-
 
-    import logging
-    import hpestorapi
+        import logging
+        import hpestorapi
 
-    if __name__ == '__main__':
-        # Setup logging format, level, logfile
-        logfmt = ('[%(asctime)s] '
-                  '%(levelname)-8s '
-                  '%(filename)-12s:%(lineno)-3d '
-                  '%(message)s')
+        if __name__ == '__main__':
+            # Setup logging format, level, logfile
+            logfmt = ('[%(asctime)s] '
+                      '%(levelname)-8s '
+                      '%(filename)-12s:%(lineno)-3d '
+                      '%(message)s')
 
-        logging.basicConfig(format=logfmt,
-                            level=logging.WARNING,
-                            filename='messages.log')
+            logging.basicConfig(format=logfmt,
+                                level=logging.WARNING,
+                                filename='messages.log')
 
-        # Set XP, 3PAR, StoreOnce loglevel
-        logging.getLogger("hpestorapi.xp").setLevel(logging.DEBUG)
-        logging.getLogger("hpestorapi.storeserv").setLevel(logging.DEBUG)
-        logging.getLogger("hpestorapi.storeonce").setLevel(logging.DEBUG)
+            # Set XP, 3PAR, StoreOnce loglevel
+            logging.getLogger("hpestorapi.xp").setLevel(logging.DEBUG)
+            logging.getLogger("hpestorapi.storeserv").setLevel(logging.DEBUG)
+            logging.getLogger("hpestorapi.storeonce").setLevel(logging.DEBUG)
 
-        """
-        Your code starts here
-        """
+            """
+            Your code starts here
+            """
 
 Five logging levels are used:
 
