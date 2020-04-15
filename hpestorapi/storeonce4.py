@@ -17,7 +17,7 @@
 
 """
 .. module:: hpestorapi.storeonce4
-    :synopsis: Module with HPE 3PAR disk array wrapper
+    :synopsis: Module with HPE StoreOnce Gen4 disk backup device
 
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
