@@ -205,10 +205,38 @@ class StoreOnceG3:
         return (resp.status_code, resp.content.decode('utf-8'))
 
     def put(self, url, **kwargs):
+        """
+        Perform HTTP PUT request to HPE Storeonce disk backup device. Method
+        used to update objects.
+
+        :param str url: URL address. Base part of url address is generated
+            automatically and you should not care about it. Example of valid
+            url: 'cluster' or 'cluster/servicesets'. All available url's
+            and requests result are described in "HPE StoreOnce 3.18.2 REST
+            API developer Guide"
+        :param int timeout: (optional)
+        :rtype: (int, string)
+        :return: Tuple with HTTP status code and xml string with request
+            result. For example: (200, '<xml> ... </xml>').
+        """
         resp = self.query(url, 'PUT', **kwargs)
         return (resp.status_code, resp.content.decode('utf-8'))
 
     def delete(self, url, **kwargs):
+        """
+        Perform HTTP DELETE request to HPE Storeonce disk backup device. Method
+        used to delete objects.
+
+        :param str url: URL address. Base part of url address is generated
+            automatically and you should not care about it. Example of valid
+            url: 'cluster' or 'cluster/servicesets'. All available url's
+            and requests result are described in "HPE StoreOnce 3.18.2 REST
+            API developer Guide"
+        :param int timeout: (optional)
+        :rtype: (int, string)
+        :return: Tuple with HTTP status code and xml string with request
+            result. For example: (200, '<xml> ... </xml>').
+        """
         resp = self.query(url, 'DELETE', **kwargs)
         return (resp.status_code, resp.content.decode('utf-8'))
 
