@@ -61,8 +61,6 @@ class StoreOnceG3:
         self._address = address
         self._user = user
         self._password = password
-        self._base_url = f'https://{address}:{port}/storeonceservices'
-        LOG.debug('StoreOnce device base url = %s', self._base_url)
 
         # Default timeouts:
         # ConnectionTimeout = 1 second
@@ -80,6 +78,17 @@ class StoreOnceG3:
             else:
                 LOG.warning('Cookie directory is not available. Path: %s',
                             cookie_dir)
+
+    @property
+    def _base_url(self):
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        url = f'https://{self._address}:{self._port}/storeonceservices'
+        return url
 
     def __del__(self):
         self._cookie_save()
