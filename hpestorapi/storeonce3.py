@@ -17,14 +17,14 @@
 
 """
 .. module:: hpestorapi.storeonce3
-    :synopsis: Module with HPE 3PAR disk array wrapper
+    :synopsis: Module with HPE StoreOnce Gen3 disk backup device
 
 .. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
 """
 
 import copy
 import logging
-import os
+from os.path import join, normpath, isdir, isfile
 import pickle
 import socket
 import warnings
