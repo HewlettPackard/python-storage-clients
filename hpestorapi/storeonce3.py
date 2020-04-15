@@ -52,9 +52,9 @@ class StoreOnceG3:
             backup device.
         :param str user: Username for HPE StoreOnce disk backup device.
         :param str password: Password for HPE StoreOnce disk backup device.
-        :param str cookie_dir: User name for HPE XP disk array. Its recommended
-            to create dedicated user with limited rights. It's a bad idea to
-            use "arrayadmin" account.
+        :param str cookie_dir: User name for HPE StoreOnce disk backup device.
+            Its recommended to create dedicated user with limited rights. It's
+            a bad idea to use "Admin" account.
         :param int port: (optional) Custom port number for StoreOnce device.
         :return: None.
         """
