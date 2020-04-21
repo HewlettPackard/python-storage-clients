@@ -61,6 +61,7 @@ class StoreOnceG3:
         self._address = address
         self._user = user
         self._password = password
+        self._port = port
 
         # Default timeouts:
         # ConnectionTimeout = 1 second
