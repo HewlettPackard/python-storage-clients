@@ -1,9 +1,13 @@
 Change Log
 ************************************************************************
 
-Version 0.9.8 (TBD)
+Version 0.9.8 (April 22, 2020)
 ========================================================================
-TBD
+
+* Minor changes in StoreOnceG3 implementation
+* Documentation coverage improvments
+
+There is no plans to implement new functions in branch 0.9.x. Only for bugfixes.
 
 
 Version 0.9.7 (March 7, 2020)
