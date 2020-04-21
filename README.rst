@@ -72,7 +72,7 @@ Usage example
 
 Documentation
 ========================================================================
-The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.9.8.pdf>`_
+The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-0.10.1.pdf>`_
 
 Issues
 ========================================================================
