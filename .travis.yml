@@ -10,7 +10,7 @@ services:
 branches:
   only:
   - master
-  - latest
+  - experimental
 
 before_install:
   - git checkout v0.10.1
