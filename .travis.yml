@@ -20,8 +20,12 @@ install:
   - pip install -r requirements/development.txt
 
 script:
-  - tox
+  - pytest test/test_storeonce3.py
+  - pytest test/test_storeserv.py
 
 notifications:
   email:
-    - ivan.smirnov@hpe.com
+    recipients:
+      - ivan.smirnov@hpe.com
+    on_success: never
+    on_failure: always
