@@ -10,8 +10,8 @@ services:
 before_install:
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
-  - docker run storeserv
-  - docker run storeonce3
+  - docker run storeserv --detach
+  - docker run storeonce3 --detach
 
 install:
   - pip install -r requirements/development.txt
