@@ -7,25 +7,22 @@ python:
 services:
   - docker
 
-branches:
-  only:
-  - master
-  - experimental
-
 before_install:
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
+  - docker run storeserv
+  - docker run storeonce3
 
 install:
   - pip install -r requirements/development.txt
 
 script:
-  - pytest test/test_storeonce3.py
-  - pytest test/test_storeserv.py
+  - docker ru
+  - pytest test/
 
 notifications:
   email:
     recipients:
       - ivan.smirnov@hpe.com
-    on_success: never
+    on_success: change
     on_failure: always
