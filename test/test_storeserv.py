@@ -35,7 +35,7 @@ def port():
     """
     Returns 3PAR WSAPI network port number
     """
-    return os.environ.get('STORESERV_8008_TCP')
+    return os.environ.get('STORESERV_8008_TCP', 8008)
 
 def test_exception_connection_error(port):
     """
