@@ -1,0 +1,28 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+services:
+  - docker
+
+branches:
+  only:
+  - master
+  - latest
+
+before_install:
+  - git checkout v0.10.1
+  - docker build -t storeserv test/storeserv
+  - docker build -t storeonce3 test/storeonce3
+
+install:
+  - pip install -r requirements/development.txt
+
+script:
+  - tox
+
+notifications:
+  email:
+    - ivan.smirnov@hpe.com
