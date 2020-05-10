@@ -111,11 +111,14 @@ class StoreOnceG3:
             if key in allowed:
                 option[key] = copy.deepcopy(kwargs[key])
 
-        # Add standart headers for all requests
-        if 'headers' not in option.keys():
-            option['headers'] = dict()
-        option['headers'].update({'Accept': 'text/xml',
-                                  'Content-Type': 'text/xml'})
+        # Add standard headers for all requests
+        headers_default = {'Accept': 'text/xml',
+                           'Content-Type': 'text/xml'}
+        if 'headers' in option.keys():
+            headers_default.update(option['headers'])
+        option['headers'] = headers_default
+        LOG.debug('headers=', option['headers'])
+
         # Add auth cookie for all requests
         if 'cookies' not in option.keys():
             option['cookies'] = requests.cookies.RequestsCookieJar()
