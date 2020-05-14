@@ -12,12 +12,17 @@ before_install:
   - docker build -t storeonce3 test/storeonce3
   - docker run --detach storeserv
   - docker run --detach storeonce3
+  - docker ps
 
 install:
   - pip install -r requirements/development.txt
 
 script:
   - pytest test/
+
+after_script:
+  - docker stop storeserv
+  - docker stop storeserv
 
 notifications:
   email:
