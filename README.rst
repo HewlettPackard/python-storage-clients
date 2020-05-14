@@ -78,6 +78,10 @@ Issues
 ========================================================================
 If you encounter any problems, please `open an issue <https://github.com/HewlettPackard/python-storage-clients/issues>`_ along with a detailed description.
 
+Package Version Numbers
+========================================================================
+This project follows `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
+
 Unit Tests
 ========================================================================
 You should install docker prior to running tests. To run all unit tests:
