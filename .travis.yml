@@ -13,7 +13,6 @@ branches:
   - latest
 
 before_install:
-  - git checkout v0.10.1
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
 
