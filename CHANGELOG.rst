@@ -1,11 +1,11 @@
 Change Log
 ************************************************************************
 
-Version 0.9.9 (TBD)
+Version 0.9.9 (May 15, 202)
 ========================================================================
-Bugfix release:
+Issue resolved:
 
-* TBD
+* StoreOnceG3: Standart HTTP headers (Accept, Content-Type) can be overrided by user (GitHub issue #6).
 
 Version 0.9.8 (April 22, 2020)
 ========================================================================
