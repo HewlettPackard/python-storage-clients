@@ -10,8 +10,8 @@ services:
 before_install:
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
-  - docker run --detach -p 8008:8008  storeserv
-  - docker run --detach -p 443:443 storeonce3
+  - docker run --detach --publish 8008:8008 storeserv
+  - docker run --detach --publish 443:443 storeonce3
 
 install:
   - pip install -r requirements/development.txt

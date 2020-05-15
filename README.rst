@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
+    :target: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
+
 hpestorapi - storage scripting for humans
 ************************************************************************
 
