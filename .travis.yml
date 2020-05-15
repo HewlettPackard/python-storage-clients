@@ -13,14 +13,17 @@ branches:
   - latest
 
 before_install:
+  - docker network create --subnet=10.254.254.0/24 privnet
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
+  - docker run --network privnet --ip 10.254.254.1 -d storeserv
+  - docker run --network privnet --ip 10.254.254.2 -d storeonce3
 
 install:
   - pip install -r requirements/development.txt
 
 script:
-  - tox
+
 
 notifications:
   email:
