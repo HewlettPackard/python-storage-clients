@@ -51,7 +51,7 @@ def test_exception_auth_error(port):
     AuthError exception raising text.
     Wrong user or password.
     """
-    array = hpestorapi.StoreServ('10.254.254.1', 'user', 'wrong-password', ssl=False, port=port)
+    array = hpestorapi.StoreServ('localhost', 'user', 'wrong-password', ssl=False, port=port)
     with pytest.raises(hpestorapi.storeserv.AuthError):
         array.open()
 
@@ -59,7 +59,7 @@ def test_get(port):
     """
     GET request
     """
-    with hpestorapi.StoreServ('10.254.254.1', '3paradm', '3pardata', ssl=False, port=port) as array:
+    with hpestorapi.StoreServ('localhost', '3paradm', '3pardata', ssl=False, port=port) as array:
         array.open()
         status, _ = array.get('system')
         assert status == 200
@@ -68,7 +68,7 @@ def test_post(port):
     """
     POST request
     """
-    with hpestorapi.StoreServ('10.254.254.1', '3paradm', '3pardata', ssl=False, port=port) as array:
+    with hpestorapi.StoreServ('localhost', '3paradm', '3pardata', ssl=False, port=port) as array:
         array.open()
         status, _ = array.post('hosts', {'name': 'RestApiTestHost', 'persona': 5})
         assert status == 201
