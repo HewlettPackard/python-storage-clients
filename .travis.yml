@@ -16,15 +16,22 @@ before_install:
   - docker network create --subnet=10.254.254.0/24 privnet
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
-  - docker run --network privnet --ip 10.254.254.1 -d storeserv
-  - docker run --network privnet --ip 10.254.254.2 -d storeonce3
+  - docker run --detach --network privnet --ip 10.254.254.1 -d storeserv
+  - docker run --detach --network privnet --ip 10.254.254.2 -d storeonce3
 
 install:
   - pip install -r requirements/development.txt
 
 script:
+  - pytest test/
 
+after_script:
+  - docker stop storeserv
+  - docker stop storeonce3
 
 notifications:
   email:
-    - ivan.smirnov@hpe.com
+    recipients:
+      - ivan.smirnov@hpe.com
+    on_success: change
+    on_failure: always
