@@ -24,8 +24,6 @@
 
 import copy
 import logging
-from os.path import join, normpath, isdir, isfile
-import socket
 import warnings
 from xml.etree import ElementTree as ETree
 
@@ -65,7 +63,7 @@ class StoreOnceG3:
         # Default timeouts:
         # ConnectionTimeout = 1 second
         # ReadTimeout = infinity
-        self._timeout = (1.0, None)
+        self._timeout = (1.0, None)ls
 
     @property
     def cookie_path(self):
@@ -76,9 +74,9 @@ class StoreOnceG3:
         :return: Cookie file path
         """
         if not hasattr(self, '_cookie_path'):
-                dir = self._cookie_dir or '.'
-                filename = f'{self._address}.cookie'
-                self._cookie_path = normpath(join(dir, filename))
+            directory = self._cookie_dir or '.'
+            filename = f'{self._address}.cookie'
+            self._cookie_path = normpath(join(directory, filename))
 
         return self._cookie_path
 

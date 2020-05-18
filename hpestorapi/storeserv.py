@@ -40,6 +40,9 @@ class StoreServ:
     """
         HPE 3PAR array implementation class.
     """
+    _address: str = ''
+    _username: str = ''
+    _password: str = ''
 
     def __init__(self, address, username, password, port=None, ssl=True, verify=True):
         """
@@ -181,7 +184,7 @@ class StoreServ:
 
         return resp.status_code, jdata
 
-    def open(self):
+    def open(self) -> None:
         """
         Open new Rest API session for HPE 3PAR array. You should call it prior
         any other requests. Do not forget to call :meth:`StoreServ.close` if
@@ -209,7 +212,7 @@ class StoreServ:
             raise AuthError('Cannot connect to StoreServ. '
                             'Authentification error: %s', data['desc'])
 
-    def close(self):
+    def close(self) -> None:
         """
         Close Rest API session.
 
@@ -330,7 +333,7 @@ class StoreServ:
     """
 
     @property
-    def _base_url(self):
+    def _base_url(self) -> str:
         """
         Generate static part of URL.
 
@@ -345,7 +348,7 @@ class StoreServ:
             port = 8080 if self._ssl else 8008
         else:
             port = self._port
-            
+
         return f'{proto}://{self._address}:{port}/api/v1'
 
     def __enter__(self):

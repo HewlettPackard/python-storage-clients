@@ -23,10 +23,11 @@
 """
 
 import logging
-from os.path import join, normpath, isdir, isfile
+from os.path import isfile
 import pickle
 
 LOG = logging.getLogger('hpestorapi.storeonce')
+
 
 def load_cookie(filepath):
     """
@@ -65,6 +66,7 @@ def load_cookie(filepath):
 
     return None
 
+
 def save_cookie(filepath, cookie):
     """
     Dump cookies to cookie file.
@@ -93,4 +95,3 @@ def save_cookie(filepath, cookie):
 
     LOG.debug('Cookie succefully saved to file.')
     return True
-
