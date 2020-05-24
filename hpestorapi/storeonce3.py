@@ -63,7 +63,7 @@ class StoreOnceG3:
         # Default timeouts:
         # ConnectionTimeout = 1 second
         # ReadTimeout = infinity
-        self._timeout = (1.0, None)ls
+        self._timeout = (1.0, None)
 
     @property
     def cookie_path(self):
