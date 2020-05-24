@@ -24,6 +24,7 @@
 
 import copy
 import logging
+from os.path import join, normpath
 import warnings
 from xml.etree import ElementTree as ETree
 
