@@ -81,7 +81,9 @@ Usage example
 
 Documentation
 ========================================================================
-The latest version of the documentation can be found here: `pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-1.0.0.pdf>`_
+The latest version of the documentation can be found here:
+`pdf <https://github.com/HewlettPackard/python-storage-clients/raw/master/doc/build/latex/hpestorapi-1.0.0.pdf>`_
+`html <https://hpestorapi.readthedocs.io/en/latest/?badge=latest>`_
 
 Issues
 ========================================================================
