@@ -29,3 +29,8 @@ notifications:
       - ivan.smirnov@hpe.com
     on_success: change
     on_failure: always
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/251777cc2c3db5f48450
+    on_success: always
+    on_failure: always
