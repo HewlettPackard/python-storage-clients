@@ -86,8 +86,10 @@ The latest version of the documentation can be found here:
 
 Issues
 ========================================================================
-If you encounter any problems, please `open an issue <https://github.com/HewlettPackard/python-storage-clients/issues>`_ along with a detailed description.
-
+If you encounter any problems, please `open an issue <https://github
+.com/HewlettPackard/python-storage-clients/issues>`_ along with a detailed
+description. Your questions are welcomed in `gitter chat <https://gitter
+.im/python-storage-clients>`_.
 
 Package Version Numbers
 ========================================================================
