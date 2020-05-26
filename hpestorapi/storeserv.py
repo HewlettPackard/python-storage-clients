@@ -214,7 +214,8 @@ class StoreServ:
 
     def close(self) -> None:
         """
-        Close Rest API session.
+        Close Rest API session. You don't need to run it manually if you use
+        context manager.
 
         :return: None
         """

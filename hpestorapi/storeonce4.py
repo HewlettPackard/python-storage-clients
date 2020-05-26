@@ -184,7 +184,8 @@ class StoreOnceG4:
 
     def close(self):
         """
-        Close Rest API session.
+        Close Rest API session. You don't need to run it manually if you use
+        context manager.
 
         :return: None
         """
