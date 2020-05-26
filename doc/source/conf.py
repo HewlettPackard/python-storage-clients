@@ -89,7 +89,9 @@ html_theme = "sphinx_rtd_theme"
 #
 html_theme_options = {
     'stickysidebar': True,
-    'sidebarwidth': '290'
+    'sidebarwidth': '290',
+    'collapse_navigation': False,
+    'navigation_depth': 3,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
