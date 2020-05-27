@@ -482,8 +482,8 @@ class Xp(ConfManager):
 
 
 class AuthError(Exception):
-    """ :raises AuthError: Wrong device credentials. """
+    """:raises AuthError: Wrong device credentials."""
 
 
 class WrongParameter(ValueError):
-    """ :raises WrongParameter: Unknown or not supported device parameter. """
+    """:raises WrongParameter: Unknown or not supported device parameter."""
