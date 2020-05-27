@@ -482,8 +482,12 @@ class Xp(ConfManager):
 
 
 class AuthError(Exception):
-    """ Authentification error """
+    """
+    :raises AuthError: Wrong device credentials.
+    """
 
 
 class WrongParameter(ValueError):
-    """ Wrong class initialization parameter """
+    """
+    :raises WrongParameter: Unknown or not supported device parameter.
+    """
