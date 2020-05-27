@@ -24,11 +24,10 @@
 
 import logging
 import warnings
-
 from urllib.parse import quote
+
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
 
 if __name__ == "__main__":
     pass
@@ -37,14 +36,10 @@ LOG = logging.getLogger('hpestorapi.storeserv')
 
 
 class StoreServ:
-    """
-        HPE 3PAR array implementation class.
-    """
-    _address: str = ''
-    _username: str = ''
-    _password: str = ''
+    """HPE 3PAR array implementation class."""
 
-    def __init__(self, address, username, password, port=None, ssl=True, verify=True):
+    def __init__(self, address, username, password, port=None, ssl=True,
+                 verify=True):
         """
         HPE 3PAR constructor.
 
@@ -112,7 +107,7 @@ class StoreServ:
             For example: dict('status':200, 'data':{'key':'value'}).
             Second value may be None if 3PAR array returns no message body,
         """
-        # Set connection and read timeout (if not set by user for current request)
+        # Set connection timeout and read timeout
         timeout = kwargs.pop('timeout', self._timeout)
 
         # Add default and auth headers to parameter list
