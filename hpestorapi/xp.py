@@ -123,17 +123,8 @@ class ConfManager:
 
         return resp.status_code, jdata  # success = True, data = json
 
-    def _set_timeout(self, delay):
-        if isinstance(delay, (float, int)):
-            self._timeout = (delay, delay)
-        elif isinstance(delay, tuple):
-            self._timeout = delay
-        elif delay is None:
-            self._timeout = (None, None)
-        else:
-            raise WrongParameter('Wrong timeout value.')
-
-    def _get_timeout(self):
+    @property
+    def timeout(self):
         """
         Rest API client timeout.
 
@@ -147,13 +138,22 @@ class ConfManager:
             wait forever for a device response. Default value: (1, None).
 
         .. versionchanged:: 1.0.0
-            Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
 
-            Supports `None` value to set unlimited delay time.
+            * Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
+            * Supports `None` value to set unlimited delay time.
         """
         return self._timeout
 
-    timeout = property(_get_timeout, _set_timeout)
+    @property.setter
+    def timeout(self, delay):
+        if isinstance(delay, (float, int)):
+            self._timeout = (delay, delay)
+        elif isinstance(delay, tuple):
+            self._timeout = delay
+        elif delay is None:
+            self._timeout = (None, None)
+        else:
+            raise WrongParameter('Wrong timeout value.')
 
 
 class CommandViewAE(ConfManager):
