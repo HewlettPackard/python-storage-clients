@@ -146,7 +146,7 @@ class ConfManager:
 
             .. versionchanged:: 1.0.0
                 Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
-                
+
                 Supports `None` value to set unlimited delay time.
         """
         return self._timeout
