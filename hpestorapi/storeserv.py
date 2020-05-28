@@ -98,15 +98,15 @@ class StoreServ:
             Static part of url is generated automatically.
         :param str method: HTTP method. Could be 'GET', 'POST', 'DELETE' or
             'PUT'.
-        :param float|tuple timeout: (optional) Like :attr:`StoreServ.timeout`
+        :param float|tuple timeout: (optional) Like :attr:`StoreServ.delay`
             but only for one query.
         :rtype: tuple(int, dict)
         :return: Dictionary with HTTP status code and json data.
             For example: dict('status':200, 'data':{'key':'value'}).
             Second value may be None if 3PAR array returns no message body,
         """
-        # Set connection timeout and read timeout
-        timeout = kwargs.pop('timeout', self.timeout)
+        # Set connection delay and read delay
+        timeout = kwargs.pop('delay', self.timeout)
 
         # Add default and auth headers to parameter list
         kwargs.setdefault('headers', dict())
@@ -153,10 +153,10 @@ class StoreServ:
                             resp.content)
             return resp.status_code, None
 
-        # Check wsapi session timeout error
+        # Check wsapi session delay error
         if (resp.status_code == 403) and (jdata.get('code', None) == 6):
             if self._key is not None:
-                LOG.info('Session timeout occurs. Session key is invalid. '
+                LOG.info('Session delay occurs. Session key is invalid. '
                          'Try to get new one.')
 
             # Just forget about current (inactive) session
@@ -303,11 +303,13 @@ class StoreServ:
         """
         return self._query(url, 'PUT', json=body)
 
-    def _set_timeout(self, timeout):
-        if isinstance(timeout, (float, int)):
-            self._timeout = (timeout, timeout)
-        elif isinstance(timeout, tuple):
-            self._timeout = timeout
+    def _set_timeout(self, delay):
+        if isinstance(delay, (float, int)):
+            self._timeout = (delay, delay)
+        elif isinstance(delay, tuple):
+            self._timeout = delay
+        elif delay is None:
+            self._timeout = (None, None)
         else:
             raise WrongParameter('Wrong timeout value.')
 
@@ -316,17 +318,17 @@ class StoreServ:
 
     timeout = property(_get_timeout, _set_timeout)
     """
-        :var float|tuple timeout: Number of seconds that Rest API
+        :var float|tuple delay: Number of seconds that Rest API
             client waits for response from HPE StoreServ
-            before timeout exception generation. You can use
+            before delay exception generation. You can use
             different timeouts for connection setup and for getting
             first piece of data. In this case, you should use
             tuple(float, float) with first value - connection
-            timeout and the second value - read timeout. Or if
+            delay and the second value - read delay. Or if
             you want to use same values for both type of timeouts,
             you can use one float value. 'None' value can be used
             instead to wait forever for a device response. Default
-            value: (1, None)
+            value: (1, None).
     """
 
     @property
