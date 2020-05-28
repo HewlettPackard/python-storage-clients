@@ -134,23 +134,23 @@ class ConfManager:
             raise WrongParameter('Wrong timeout value.')
 
     def _get_timeout(self):
+        """
+             :var float|tuple delay: Number of seconds that Rest API client waits
+                for http(s) response from Configuration Manager. You can use
+                different timeouts for connection setup and for getting first
+                piece of data. In this case, you should use tuple(float, float
+                with first value - connection delay and the second value - read
+                delay. Or if you want to use same values for both type of timeouts,
+                you can use one float value. 'None' value can be used instead to
+                wait forever for a device response. Default value: (1, None).
+
+            ..versionchanged:: 1.0.0
+                Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
+                Supports `None` value to set unlimited delay time.
+        """
         return self._timeout
 
     timeout = property(_get_timeout, _set_timeout)
-    """
-         :var float|tuple delay: Number of seconds that Rest API client waits
-            for http(s) response from Configuration Manager. You can use
-            different timeouts for connection setup and for getting first
-            piece of data. In this case, you should use tuple(float, float
-            with first value - connection delay and the second value - read
-            delay. Or if you want to use same values for both type of timeouts,
-            you can use one float value. 'None' value can be used instead to
-            wait forever for a device response. Default value: (1, None).
-
-        ..versionchanged:: 1.0.0
-            Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
-            Supports `None` value to set unlimited delay time.
-    """
 
 
 class CommandViewAE(ConfManager):
