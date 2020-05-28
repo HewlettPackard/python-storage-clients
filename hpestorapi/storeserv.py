@@ -24,6 +24,8 @@ from urllib.parse import quote
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .exceptions import AuthError, WrongParameter
+
 if __name__ == "__main__":
     pass
 
@@ -306,6 +308,8 @@ class StoreServ:
             self._timeout = (timeout, timeout)
         elif isinstance(timeout, tuple):
             self._timeout = timeout
+        else:
+            raise WrongParameter('Wrong timeout value.')
 
     def _get_timeout(self):
         return self._timeout
@@ -353,7 +357,3 @@ class StoreServ:
         # Close active Rest API session
         if self._key is not None:
             self.close()
-
-
-class AuthError(Exception):
-    """Authentication error."""

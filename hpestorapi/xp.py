@@ -28,6 +28,8 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .exceptions import AuthError, WrongParameter
+
 if __name__ == "__main__":
     pass
 
@@ -479,11 +481,3 @@ class Xp(ConfManager):
     def __str__(self):
         class_name = self.__class__.__name__
         return f'<class hpestorapi.{class_name}(dev={self._dev})>'
-
-
-class AuthError(Exception):
-    """:raises AuthError: Wrong device credentials."""
-
-
-class WrongParameter(ValueError):
-    """:raises WrongParameter: Unknown or not supported device parameter."""
