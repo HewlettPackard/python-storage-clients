@@ -144,7 +144,7 @@ class ConfManager:
         """
         return self._timeout
 
-    @property.setter
+    @timeout.setter
     def timeout(self, delay):
         if isinstance(delay, (float, int)):
             self._timeout = (delay, delay)
