@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.storeserv
-    :synopsis: Module with HPE 3PAR disk array wrapper
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE 3PAR disk array wrapper."""
 
 import logging
 import warnings
@@ -41,7 +36,7 @@ class StoreServ:
     def __init__(self, address, username, password, port=None, ssl=True,
                  verify=True):
         """
-        HPE 3PAR constructor.
+        HPE 3PAR object constructor.
 
         :param str address: Hostname or IP address of HPE 3PAR array
             (management address). Web Services API should be enabled for this
@@ -88,7 +83,8 @@ class StoreServ:
         }
 
     def __del__(self):
-        # Perform session close
+        """HPE 3PAR object destructor."""
+        # Close active Rest API session
         if self._key is not None:
             self.close()
 
@@ -108,7 +104,7 @@ class StoreServ:
             Second value may be None if 3PAR array returns no message body,
         """
         # Set connection timeout and read timeout
-        timeout = kwargs.pop('timeout', self._timeout)
+        timeout = kwargs.pop('timeout', self.timeout)
 
         # Add default and auth headers to parameter list
         kwargs.setdefault('headers', dict())
@@ -153,7 +149,7 @@ class StoreServ:
             if resp.content:
                 LOG.warning('Cannot decode JSON. Source string: "%s"',
                             resp.content)
-            return resp.status_code, None  # (status, data)
+            return resp.status_code, None
 
         # Check wsapi session timeout error
         if (resp.status_code == 403) and (jdata.get('code', None) == 6):
@@ -172,7 +168,7 @@ class StoreServ:
             except Exception as error:
                 LOG.fatal('Cannot open new WSAPI session. Exception: %s',
                           repr(error))
-                raise
+                raise error
             else:
                 LOG.debug('Request replay success.')
                 return replay
@@ -181,10 +177,11 @@ class StoreServ:
 
     def open(self) -> None:
         """
-        Open new Rest API session for HPE 3PAR array. You should call it prior
-        any other requests. Do not forget to call :meth:`StoreServ.close` if
-        you don't plan to use session anymore, because 3PAR array has active
-        sessions limit.
+        Open new Rest API session for HPE 3PAR array.
+
+        You should call it prior any other requests. Do not forget to call
+        :meth:`StoreServ.close` if you don't plan to use session anymore,
+        because 3PAR array has active sessions limit.
 
         If some troubles occurs you should manually check:
 
@@ -209,8 +206,8 @@ class StoreServ:
 
     def close(self) -> None:
         """
-        Close Rest API session. You don't need to run it manually if you use
-        context manager.
+        Close Rest API session. You don't need to run it manually if you use \
+        context manager (block ``with .. as ..:``).
 
         :return: None
         """
@@ -233,7 +230,7 @@ class StoreServ:
 
     def get(self, url, query=None):
         """
-        Perform HTTP GET request to HPE 3PAR array. Method used to get
+        Perform HTTP GET request to HPE 3PAR array. Method used to get \
         information about objects.
 
         :param str url: URL address. Base part of url address is generated
@@ -256,7 +253,7 @@ class StoreServ:
 
     def post(self, url, body):
         """
-        Perform HTTP POST request to HPE 3PAR array. Method used to create new
+        Perform HTTP POST request to HPE 3PAR array. Method used to create new \
         objects.
 
         :param str url: URL address. Base part of url address is generated
@@ -348,12 +345,15 @@ class StoreServ:
         return f'{proto}://{self._address}:{port}/api/v1'
 
     def __enter__(self):
+        """Create and return 3PAR object."""
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        """Destroy 3PAR object."""
+        # Close active Rest API session
         if self._key is not None:
             self.close()
 
 
 class AuthError(Exception):
-    """ Authentification error """
+    """Authentication error."""
