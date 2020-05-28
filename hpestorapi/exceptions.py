@@ -17,8 +17,10 @@
 
 """Module with common exceptions."""
 
+
 class AuthError(Exception):
     """:raises AuthError: Authentication error."""
+
 
 class WrongParameter(ValueError):
     """:raises WrongParameter: Unknown or not supported device parameter."""
