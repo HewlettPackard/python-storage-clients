@@ -6,7 +6,7 @@ API reference
 .. autoclass:: hpestorapi.Xp
     :members:
     :undoc-members:
-    :inherited-members: http_timeout
+    :inherited-members: timeout
 
 Usage examples
 --------------------------------------------------------------------------------
