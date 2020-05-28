@@ -144,8 +144,9 @@ class ConfManager:
                 you can use one float value. 'None' value can be used instead to
                 wait forever for a device response. Default value: (1, None).
 
-            ..versionchanged:: 1.0.0
+            .. versionchanged:: 1.0.0
                 Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
+                
                 Supports `None` value to set unlimited delay time.
         """
         return self._timeout
