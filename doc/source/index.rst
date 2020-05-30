@@ -25,4 +25,4 @@ supports:
     pages/storeonce3
     pages/storeonce4
     pages/debug
-    ../../CHANGELOG
+    CHANGELOG
