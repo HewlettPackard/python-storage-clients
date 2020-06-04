@@ -6,7 +6,7 @@ Requirements
 --------------------------------------------------------------------------------
 hpestorapi library depends on:
 
-* Python 3.6 or newer
+* CPython 3.6+ or PyPy3 interpreter
 * Python `requests library <http://python-requests.org>`_ version 2.19.1 or newer
 
 Install from PyPI
