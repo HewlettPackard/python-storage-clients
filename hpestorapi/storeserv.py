@@ -303,7 +303,24 @@ class StoreServ:
         """
         return self._query(url, 'PUT', json=body)
 
-    def _set_timeout(self, delay):
+    @property
+    def timeout(self):
+        """
+        Rest API client timeout.
+
+        Number of seconds that Rest API client waits for response from HPE
+        StoreServ before delay exception generation. You can use different
+        timeouts for connection setup and for getting first piece of data. In
+        this case, you should use tuple(float, float) with first value -
+        connection delay and the second value - read delay. Or if you want
+        to use same values for both type of timeouts, you can use one float
+        value. 'None' value can be used instead to wait forever for a device
+        response. Default value: (1, None).
+        """
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, delay):
         if isinstance(delay, (float, int)):
             self._timeout = (delay, delay)
         elif isinstance(delay, tuple):
@@ -312,24 +329,6 @@ class StoreServ:
             self._timeout = (None, None)
         else:
             raise WrongParameter('Wrong timeout value.')
-
-    def _get_timeout(self):
-        return self._timeout
-
-    timeout = property(_get_timeout, _set_timeout)
-    """
-        :var float|tuple delay: Number of seconds that Rest API
-            client waits for response from HPE StoreServ
-            before delay exception generation. You can use
-            different timeouts for connection setup and for getting
-            first piece of data. In this case, you should use
-            tuple(float, float) with first value - connection
-            delay and the second value - read delay. Or if
-            you want to use same values for both type of timeouts,
-            you can use one float value. 'None' value can be used
-            instead to wait forever for a device response. Default
-            value: (1, None).
-    """
 
     @property
     def _base_url(self) -> str:
