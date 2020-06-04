@@ -46,6 +46,10 @@ Five logging levels are used:
 
 Bug reports
 --------------------------------------------------------------------------------
-If you have found a bug, please create an `issue in GitHub <https://github.com/HewlettPackard/python-storage-clients/issues>`_.
+If you have found a bug, please create an `GitHub issue <https://github
+.com/HewlettPackard/python-storage-clients/issues>`_.
+
+Your questions are welcomed in `gitter chat <https://gitter
+.im/python-storage-clients>`_.
 
 And do not hesitate to contact me: Ivan Smirnov <ivan.smirnov@hpe.com>
