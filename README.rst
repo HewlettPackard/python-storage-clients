@@ -1,11 +1,11 @@
 .. image:: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
     :target: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
 
-.. image:: https://badges.gitter.im/python-storage-clients/community.svg
-    :target: https://gitter.im/python-storage-clients/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-
 .. image:: https://readthedocs.org/projects/hpestorapi/badge/?version=latest
     :target: https://hpestorapi.readthedocs.io/en/latest/?badge=latest
+
+.. image:: https://badges.gitter.im/python-storage-clients/community.svg
+    :target: https://gitter.im/python-storage-clients/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
 hpestorapi - storage scripting for humans
 ************************************************************************
