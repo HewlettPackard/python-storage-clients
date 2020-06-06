@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.storeonce3
-    :synopsis: Module with HPE StoreOnce Gen3 disk backup device
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE StoreOnce Gen3 disk backup device."""
 
 import copy
 import logging
@@ -31,6 +26,7 @@ from xml.etree import ElementTree as ETree
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .exceptions import WrongParameter
 from .storeonce3_utils import load_cookie, save_cookie
 
 if __name__ == "__main__":
@@ -324,22 +320,6 @@ class StoreOnceG3:
 
         LOG.critical('Cannot get filter cookie. Wrong device answer.')
         return None
-
-
-    timeout = property(_get_timeout, _set_timeout)
-    """
-        :var float|tuple timeout: Number of seconds that Rest API
-            client waits for response from HPE StoreOnce Gen 3
-            before timeout exception generation. You can use
-            different timeouts for connection setup and for getting
-            first piece of data. In this case, you should use
-            tuple(float, float) with first value - connection
-            timeout and the second value - read timeout. Or if
-            you want to use same values for both type of timeouts,
-            you can use one float value. 'None' value can be used
-            instead to wait forever for a device response. Default
-            value: (1, None).
-    """
 
     def __enter__(self):
         return self

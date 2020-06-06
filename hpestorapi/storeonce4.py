@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.storeonce4
-    :synopsis: Module with HPE StoreOnce Gen4 disk backup device
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE StoreOnce Gen4 disk backup device."""
 
 import logging
 import os
@@ -29,6 +24,8 @@ import warnings
 
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+from .exceptions import WrongParameter
 
 if __name__ == "__main__":
     pass

@@ -15,12 +15,8 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.primera
-    :synopsis: Module with HPE Primera disk array wrapper
+"""Module with HPE Primera disk array wrapper."""
 
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
 
 import logging
 
