@@ -234,9 +234,9 @@ class StoreServ:
         information about objects.
 
         :param str url: URL address. The static part of the URL address is
-        generated automatically. Example of a valid URL: 'system' or 'volumes'.
-        All available URLs and requests results are described in "HPE 3PAR
-        Web Services API Developer's Guide"
+            generated automatically. Example of a valid URL: 'system' or
+            'volumes'. All available URLs and requests results are described
+            in "HPE 3PAR Web Services API Developer's Guide".
         :param str query: (optional) Query filter specification (see "WSAPI
             query syntax" in "HPE 3PAR Web Services API Developer's Guide").
         :rtype: tuple(int, dict)
@@ -258,7 +258,7 @@ class StoreServ:
         :param str url: URL address. The static part of the URL address is
             generated automatically. Example of a valid URL: 'system' or
             'volumes'. All available URLs, request parameters and results
-            are described in "HPE 3PAR Web Services API Developer's Guide"
+            are described in "HPE 3PAR Web Services API Developer's Guide".
         :param dict body: Request parameter, used to create new array object.
         :rtype: tuple (int, dict)
         :return: Tuple with HTTP status code and dict with request result.
@@ -274,7 +274,7 @@ class StoreServ:
         :param str url: URL address. The static part of the URL address is
             generated automatically. Example of a valid URL: 'system' or
             'volumes'. All available URLs, request parameters and results are
-            described in "HPE 3PAR Web Services API Developer's Guide"
+            described in "HPE 3PAR Web Services API Developer's Guide".
         :return: Tuple with HTTP status code and dict with request result. For
             example: (200, {'key':'value'}). Second value may be None if 3PAR
             array returns no message body.
@@ -288,7 +288,7 @@ class StoreServ:
         :param str url: URL address. The static part of the URL address is
             generated automatically. Example of a valid URL: 'system' or
             'volumes'. All available URLs, request parameters and results are
-             described in "HPE 3PAR Web Services API Developer's Guide"
+            described in "HPE 3PAR Web Services API Developer's Guide".
         :param dict body: Request parameter, used to modify array object.
         :rtype: tuple(int, dict)
         :return: Tuple with HTTP status code and dict with request result. For
