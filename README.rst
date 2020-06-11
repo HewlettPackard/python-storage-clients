@@ -14,7 +14,7 @@ hpestorapi - storage scripting for humans
 Package description
 ========================================================================
 
-hpestorapi - python library that provides very simple way to use Rest
+hpestorapi is a python library that allows a simple way to use Rest
 API services for HPE storage and disk backup devices. Current version
 supports:
 
@@ -29,19 +29,19 @@ Installation
 
 Requirements
 --------------------------------------------------------------------------
-hpestorapi library depends on:
+hpestorapi library requires:
 
 * CPython 3.6+ or PyPy3 interpreter
 * Python `requests library <http://python-requests.org>`_
 
-Install from PyPI
+Installation from PyPI
 --------------------------------------------------------------------------
 To download and install hpestorapi you can use pip:
 ::
 
     # pip install hpestorapi
 
-Install from GitHub
+Installation from GitHub
 --------------------------------------------------------------------------
 Get a copy of source code
 ::
@@ -54,7 +54,7 @@ Install the package with dependencies:
 
     # python setup.py install
 
-Import hpestorapi library in your python script:
+Import hpestorapi library to your python script:
 
 .. code:: python
 

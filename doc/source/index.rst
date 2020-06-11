@@ -3,7 +3,7 @@ hpestorapi - storage scripting for humans
 
 Package description
 --------------------------------------------------------------------------------
-hpestorapi - python library that provides very simple way to use Rest
+hpestorapi is a python library that allows simple way to use Rest
 API services for HPE storage and disk backup devices. Current version
 supports:
 

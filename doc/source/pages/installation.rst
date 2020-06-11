@@ -4,19 +4,19 @@ Installation
 
 Requirements
 --------------------------------------------------------------------------------
-hpestorapi library depends on:
+hpestorapi library requires:
 
 * CPython 3.6+ or PyPy3 interpreter
 * Python `requests library <http://python-requests.org>`_ version 2.19.1 or newer
 
-Install from PyPI
+Installation from PyPI
 --------------------------------------------------------------------------------
 To download and install hpestorapi you can use pip:
 ::
 
     # pip install hpestorapi
 
-Install from GitHub
+Installation from GitHub
 --------------------------------------------------------------------------------
 Get a copy of source code
 ::
@@ -29,7 +29,7 @@ Install package with dependencies:
 
     # python setup.py install
 
-Import hpestorapi library in your python script:
+Import hpestorapi library to your python script:
 ::
 
     #!/usr/bin/env python3

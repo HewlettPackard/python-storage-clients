@@ -13,7 +13,7 @@ Usage examples
 Session management
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Simple way to open Rest API session for StoreServ 3PAR arrays (with
+A simple way to open a Rest API session for StoreServ 3PAR arrays (with
 exception handling and session auto-closing):
 
 .. code:: python
@@ -34,8 +34,8 @@ exception handling and session auto-closing):
 GET request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Simple GET request usage. This code print some storage system information
-(name, serial number and ip address):
+Simple GET request usage. This following code prints storage system
+information (name, serial number and IP address):
 
 .. code:: python
 
@@ -57,8 +57,8 @@ Simple GET request usage. This code print some storage system information
 
 GET request can also contain filter parameter (query='...'). Filter
 specifications are described in "HPE 3PAR Web Services API Developer's
-Guide" (see section "WSAPI query syntax"). This code print Remote Copy
-Groups names beggining with "dfs".
+Guide" (see section "WSAPI query syntax"). The following code prints Remote
+Copy Groups names beginning with "dfs".
 
 .. code:: python
 
@@ -79,7 +79,7 @@ Groups names beggining with "dfs".
 POST request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will create new host on the 3PAR array:
+The following code creates a new host on the 3PAR array:
 
 .. code:: python
 
@@ -109,7 +109,7 @@ This code will create new host on the 3PAR array:
 DELETE request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will delete host from 3PAR array:
+The following code deletes a host from the 3PAR array:
 
 .. code:: python
 
@@ -133,7 +133,7 @@ This code will delete host from 3PAR array:
 PUT request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will modify host on 3PAR array (change host persona and
+The following code modifies a host on the 3PAR array (change host persona and
 location description):
 
 .. code:: python
@@ -162,11 +162,11 @@ location description):
 
 Exception handling
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Almost all methods, that perform interaction with StoreServ 3PAR
+Almost all methods that perform interaction with the HPE StoreServ 3PAR
 array can generate exceptions. The best practice is to handle
 these exceptions.
 
-List of method, that can raise exceptions:
+List of method that can raise exceptions:
 
 * :meth:`StoreServ.open`
 * :meth:`StoreServ.get`
