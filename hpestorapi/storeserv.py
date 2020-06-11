@@ -283,7 +283,7 @@ class StoreServ:
 
     def put(self, url, body):
         """
-        Perform HTTP PUT request to HPE 3PAR array.
+        Make a HTTP PUT request to HPE 3PAR array.
 
         :param str url: URL address. The static part of the URL address is
             generated automatically. Example of a valid URL: 'system' or
