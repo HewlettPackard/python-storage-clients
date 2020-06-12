@@ -14,7 +14,7 @@ Usage examples
 Session management
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Open Rest API session for XP array:
+Open a Rest API session for an HPE XP array:
 
 .. code:: python
 
@@ -34,7 +34,8 @@ Open Rest API session for XP array:
 GET request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Simple GET request usage. This code print pool list from HPE XP array:
+A simple GET request use. The following code prints a pool list from HPE XP
+array:
 
 .. code:: python
 
@@ -60,7 +61,7 @@ Simple GET request usage. This code print pool list from HPE XP array:
 POST request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will create new ldev on the XP array:
+The following code creates a new ldev on the XP array:
 
 .. code:: python
 
@@ -85,7 +86,7 @@ This code will create new ldev on the XP array:
 DELETE request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will delete ldev 62:
+The following code deletes an ldev 62:
 
 .. code:: python
 
@@ -111,7 +112,7 @@ This code will delete ldev 62:
 PUT request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This code will change label for ldev 62:
+The following code changes the label for an ldev 62:
 
 .. code:: python
 

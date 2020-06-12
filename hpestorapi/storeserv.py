@@ -57,7 +57,7 @@ class StoreServ:
             http (False).
         :param bool|string verify: (optional) Either a boolean, controlling
             the Rest server's TLS certificate verification, or a string,
-            where it is a path to a CA bundle. By default: True.
+            where it is a path to a CA bundle. Default value: True.
         :return: None
         """
         self._address = address

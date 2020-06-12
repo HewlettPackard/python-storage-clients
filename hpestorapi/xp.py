@@ -128,14 +128,14 @@ class ConfManager:
         """
         Rest API client timeout.
 
-        Number of seconds that Rest API client waits for http(s) response
-        from Configuration Manager. You can use different timeouts for
-        connection setup and for getting first piece of data. In this case,
-        you should use tuple(float, float) where first value - connection
-        delay and the second value - read delay. If you want to use same
-        values for both type of timeouts, you can use one float ot int value.
-        ``None`` can be used instead to wait forever for a device response.
-        Default value: (1, None).
+        Number of seconds that Rest API client waits for a response from
+        Configuration Manager before generating a timeout exception.
+        Different timeouts for connection setup and for getting first piece
+        of data can be used. In this case, use tuple(float, float) with the
+        first value being a connection delay and with the second value being
+        a read delay. Alternatively, you can use one float value for both
+        types of timeouts. 'None' value can be used instead not to limit the
+        device response time. Default value: (1, None).
 
         .. versionchanged:: 1.0.0
             Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
@@ -238,19 +238,19 @@ class Xp(ConfManager):
         HPE XP constructor.
 
         :param str cvae: Hostname or IP address of HPE Command View AE
-            Configuration Manager.
+        Configuration Manager.
         :param str svp: Hostname or IP address of Service Processor (SVP).
         :param str serialnum: Array serial number (5 or 6 digits)
-        :param str username: User name for HPE XP disk array. Its recommended
-            to create dedicated user with limited rights. It's a bad idea to
-            use "arrayadmin" account.
+        :param str username: User name for HPE XP disk array. Creating a
+            dedicated user with limited rights is recommended. Using
+            "arrayadmin" account is a bad practice.
         :param str password: Password for HPE XP disk array.
         :param str gen: (optional) Disk array generation. Should be P9500 or
-            XP7. By default: XP7.
+            XP7. Default value: XP7.
         :param int port: (optional) Command View AE configuration manager
-            port. By default: 23451
-        :param bool ssl: (optional) Use secure https (True) or plain http.
-            By default: True.
+            port. Default value: 23451
+        :param bool ssl: (optional) Use secure https (True) or plain http (
+            False). Default value: True.
         :return: None.
         """
         super().__init__(cvae, port, ssl)
@@ -284,13 +284,13 @@ class Xp(ConfManager):
 
     def open(self):
         """
-        Open new Rest API session for HPE XP array.
+        Open a new Rest API session for a HPE XP array.
 
-        You should call it prior any other requests. Do not forget to call
-        :meth:`Xp.close()` if you don’t plan to use session anymore.
+        Call it prior any other requests. Call :meth:`Xp.close()` if you do not
+        plan to use session anymore.
 
         :rtype: bool
-        :return: Return True, if disk array provide valid session key.
+        :return: Return True, if disk array provides a valid session key.
         """
         status, data = self.post(
             'sessions',
@@ -342,12 +342,11 @@ class Xp(ConfManager):
         """
         Close Rest API session.
 
-        :param bool passive: (optional) Do not try to close session in array
-            (just forget client key when your session is already timed out in
-            array). This parameter may be usefull *only for method overriding*
-            in subclasses. It completely useless for you application, because
-            class implementation maintain session live transparent for you.
-            False by default.
+        :param bool passive: (optional) Do not try to close session in the
+            array. Revoke the client session key after session timed out. Use
+            this parameter only for method overriding in subclasses. There is no
+            need of using it, as class implementation manages the session
+            life cycle. Default value: False.
         :return: None
         """
         # Only for active session discard
@@ -361,26 +360,26 @@ class Xp(ConfManager):
 
     def get(self, url, **kwargs):
         """
-        Perform HTTP GET request to HPE XP array. This method used to get \
+        Make a HTTP GET request to HPE XP array. Use this method to get \
         information about array objects.
 
-        :param str url: URL address. Base part of url address is generated
-            automatically and you should not care about it. Example of valid
-            url: 'pools', 'parity-groups', 'ldevs'. All available url's and
-            requests result are described in "HPE XP7 Command View Advanced
-            Edition REST API Reference Guide".
+        :param str url: URL address. Th static part of the URL address is
+        generated automatically. Example ofvalid URL: 'pools',
+        'parity-groups', 'ldevs'. All available URL's and requests result are
+            described in "HPE XP7 Command View Advanced Edition REST API
+            Reference Guide".
         :param dict params: (optional) Dictionary with query filter
             parameters. Described in 'Query parameters' section of "HPE XP7
             Command View Advanced Edition REST API Reference Guide".
-        :param dict json: (optional) A JSON serializable object to send in
-            the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param dict json: (optional) A JSON serializable object send in
+            the request body.
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -391,18 +390,18 @@ class Xp(ConfManager):
 
     def post(self, url, **kwargs):
         """
-        Perform HTTP POST request to HPE XP array. This method used to \
-        create new object.
+        Make a HTTP POST request to HPE XP array. Use this method to create \
+            a new object.
 
         :param dict json: (optional) A JSON serializable object to send in
             the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -413,18 +412,18 @@ class Xp(ConfManager):
 
     def delete(self, url, **kwargs):
         """
-        Perform HTTP DELETE request to HPE XP array. This method used to \
-        remove objects.
+        Make a HTTP DELETE request to HPE XP array. Use this method to remove \
+        objects.
 
-        :param dict json: (optional) A JSON serializable object to send in
-            the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param dict json: (optional) A JSON serializable object send in the
+            request body.
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -439,13 +438,13 @@ class Xp(ConfManager):
 
         :param dict json: (optional) A JSON serializable object to send in
             the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.timeout`..
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
