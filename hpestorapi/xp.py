@@ -261,7 +261,7 @@ class Xp(ConfManager):
         self._username = username
         self._password = password
 
-        self.http_timeout = 300
+        self.timeout = 300
 
         # Generate device id
         if self._gen == 'P9500':
