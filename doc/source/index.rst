@@ -1,4 +1,4 @@
-hpestorapi - storage scripting for humans
+hpestorapi
 ================================================================================
 
 Package description
