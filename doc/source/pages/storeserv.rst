@@ -109,7 +109,7 @@ The following code creates a new host on the 3PAR array:
 DELETE request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following code deletes a host from the 3PAR array:
+The following code deletes a host from the HP 3PAR array:
 
 .. code:: python
 
@@ -133,8 +133,8 @@ The following code deletes a host from the 3PAR array:
 PUT request
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The following code modifies a host on the 3PAR array (change host persona and
-location description):
+The following code modifies a host on the HPE 3PAR array (change host persona
+and location description):
 
 .. code:: python
 
@@ -174,9 +174,9 @@ List of method that can raise exceptions:
 * :meth:`StoreServ.delete`
 * :meth:`StoreServ.put`
 
-.. note:: StoreServ class object constructor does not perform
-    any requests to array, therefore StoreServ object initilization
-    can't raise exceptions.
+.. note:: StoreServ class object constructor does not make
+    any requests to an array; therefore, StoreServ object initilization
+    cannot raise exceptions.
 
 Exception handling example:
 

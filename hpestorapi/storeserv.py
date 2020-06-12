@@ -41,23 +41,23 @@ class StoreServ:
         HPE 3PAR object constructor.
 
         :param str address: Hostname or IP address of HPE 3PAR array
-            (management address). Web Services API should be enabled for this
+            management interface. Web Services API should be enabled for this
             array (disabled by default). To enable Web Services API check
-            3PAR OS command: showwsapi.
+            3PAR OS command: 'showwsapi'.
         :param str username: User name for 3PAR Web Services API. Creating a
             dedicated user with limited rights recommended. For example,
             if you do not need to create/modify/delete objects on a disk
-            array, create a new user with "browse" role. Running a script
-            with a "3paradm" user ("super" role) is not recommended. To
-            create a new user, check 3PAR OS command: createuser.
+            array, create a new user with a "browse" role. Running a script
+            with a "3paradm" user is not recommended. To create a new user,
+            check 3PAR OS command: 'createuser'.
         :param str password: Password for 3PAR Web Services API.
         :param int port: (optional) Custom port number for 3PAR Web Services
             API.
         :param bool ssl: (optional) Use secure https (True) or plain text
             http (False).
         :param bool|string verify: (optional) Either a boolean, controlling
-            th Rest server's TLS certificate verification or a string,
-            where it is a path to CA bundle. By default: True.
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. By default: True.
         :return: None
         """
         self._address = address
@@ -180,8 +180,8 @@ class StoreServ:
         Open new Rest API session for HPE 3PAR array.
 
         Call it prior any other requests. Call :meth:`StoreServ.close` if
-        you don't plan to use session anymore, because 3PAR array has active
-        sessions limit.
+        you do not plan to use a session anymore, because 3PAR array has an
+        active sessions limit.
 
         Should any trouble occur, please manually check that:
 
@@ -289,7 +289,7 @@ class StoreServ:
             generated automatically. Example of a valid URL: 'system' or
             'volumes'. All available URLs, request parameters and results are
             described in "HPE 3PAR Web Services API Developer's Guide".
-        :param dict body: Request parameter, used to modify array object.
+        :param dict body: Request parameter, used to modify an array object.
         :rtype: tuple(int, dict)
         :return: Tuple with HTTP status code and dict with request result. For
             example: (200, {'key':'value'}). Second value may be None if 3PAR
