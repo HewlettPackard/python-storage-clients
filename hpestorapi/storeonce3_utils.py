@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.storeonce3_utils
-    :synopsis: HPE StoreOnce Gen3 itilities
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE StoreOnce Gen3 disk backup device additional utilities."""
 
 import logging
 from os.path import isfile
@@ -31,7 +26,7 @@ LOG = logging.getLogger('hpestorapi.storeonce')
 
 def load_cookie(filepath):
     """
-    Loads cookies from cookie file.
+    Load cookies from cookie file.
 
     :rtype: RequestsCookieJar|None
     :return: Returns cookies in case of success or None.
@@ -69,18 +64,17 @@ def load_cookie(filepath):
 
 def save_cookie(filepath, cookie):
     """
-    Dump cookies to cookie file.
+    Dump cookies to file.
 
     :rtype: bool
-    :return: True if succefully saved. In other cases returns False.
+    :return: True if successfully saved. In other cases returns False.
     """
-
     # Truncate cookies file
     try:
         fd = open(filepath, 'wb')
         fd.truncate()
     except OSError as error:
-        LOG.error('Cannot write to cookie file. Filename = "%s"', filepath)
+        LOG.error('Can not write to cookie file. Filename = "%s"', filepath)
         LOG.error(error)
         return False
 
@@ -89,9 +83,9 @@ def save_cookie(filepath, cookie):
         try:
             pickle.dump(cookie, fd)
         except pickle.PicklingError as error:
-            LOG.error('Cannot save cookies to file.')
+            LOG.error('Can not save cookies to file.')
             LOG.error(error)
             return False
 
-    LOG.debug('Cookie succefully saved to file.')
+    LOG.debug('Cookie successfully saved to file.')
     return True

@@ -29,9 +29,7 @@ LOG = logging.getLogger('hpestorapi.primera')
 
 
 class Primera(StoreServ):
-    """
-        HPE Primera array implementation class.
-    """
+    """HPE Primera array implementation class."""
 
     @property
     def _base_url(self):

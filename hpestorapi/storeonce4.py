@@ -34,9 +34,7 @@ LOG = logging.getLogger('hpestorapi.storeonce')
 
 
 class StoreOnceG4:
-    """
-        HPE StoreOnce Gen 4 backup device implementation class.
-    """
+    """HPE StoreOnce Gen 4 backup device implementation class."""
 
     def __init__(self, address, username, password):
         """
@@ -117,8 +115,9 @@ class StoreOnceG4:
     def open(self, verify=False):
         """
         Open new Rest API session for HPE StoreOnce Gen 4 disk backup.
-        You should call it prior any other requests. Do not forget to
-        call :meth:`StoreOnceG4.close()` if you don’t plan to use
+
+        You should call it prior any other requests. Do not forget to call \
+        :meth:`StoreOnceG4.close()` if you don’t plan to use
         current session anymore.
 
         :param bool|str verify: (optional) Either a boolean, in which

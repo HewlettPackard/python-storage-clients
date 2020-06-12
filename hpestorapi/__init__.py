@@ -15,9 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE Primera disk array wrapper."""
 
 from .storeserv import StoreServ
 from .storeonce3 import StoreOnceG3
