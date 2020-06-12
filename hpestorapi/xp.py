@@ -232,13 +232,13 @@ class CommandViewAE(ConfManager):
 class Xp(ConfManager):
     """XP7 / P9500 class implementation."""
 
-    def __init__(self, cvae, svp, serialnum, username, password,
-                 gen='XP7', port=23451, ssl=True):
+    def __init__(self, cvae, svp, serialnum, username, password, gen='XP7',
+                 port=23451, ssl=True):
         """
         HPE XP constructor.
 
         :param str cvae: Hostname or IP address of HPE Command View AE
-        Configuration Manager.
+            Configuration Manager.
         :param str svp: Hostname or IP address of Service Processor (SVP).
         :param str serialnum: Array serial number (5 or 6 digits)
         :param str username: User name for HPE XP disk array. Creating a
@@ -364,15 +364,15 @@ class Xp(ConfManager):
         information about array objects.
 
         :param str url: URL address. Th static part of the URL address is
-        generated automatically. Example ofvalid URL: 'pools',
-        'parity-groups', 'ldevs'. All available URL's and requests result are
-            described in "HPE XP7 Command View Advanced Edition REST API
+            generated automatically. Example ofvalid URL: 'pools',
+            'parity-groups', 'ldevs'. All available URL's and requests result
+            are described in "HPE XP7 Command View Advanced Edition REST API
             Reference Guide".
         :param dict params: (optional) Dictionary with query filter
             parameters. Described in 'Query parameters' section of "HPE XP7
             Command View Advanced Edition REST API Reference Guide".
-        :param dict json: (optional) A JSON serializable object send in
-            the request body.
+        :param dict json: (optional) A JSON serializable object send in the
+            request body.
         :param float timeout: (optional) Number of seconds that Rest API
             client waits for a response from the Rest server before
             generating a timeout exception. Default value: :attr:`Xp.timeout`.
