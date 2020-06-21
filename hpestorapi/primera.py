@@ -15,12 +15,8 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.primera
-    :synopsis: Module with HPE Primera disk array wrapper
+"""Module with HPE Primera disk array wrapper."""
 
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
 
 import logging
 
@@ -33,9 +29,7 @@ LOG = logging.getLogger('hpestorapi.primera')
 
 
 class Primera(StoreServ):
-    """
-        HPE Primera array implementation class.
-    """
+    """HPE Primera array implementation class."""
 
     @property
     def _base_url(self):

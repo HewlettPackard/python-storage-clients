@@ -35,7 +35,7 @@ def port():
     """
     Returns StoreOnce network port number
     """
-    return os.environ.get('STOREONCE3_443_TCP', 443)
+    return os.environ.get('STOREONCE3_443_TCP', '443')
 
 def test_exception_connection_error(port):
     """

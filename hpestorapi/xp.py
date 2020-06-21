@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.xp
-    :synopsis: Module with HPE XP disk array wrapper
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE XP disk array wrapper."""
 
 import logging
 import warnings
@@ -28,32 +23,47 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .exceptions import AuthError, WrongParameter
+from .base import BaseDevice
+
 if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.xp')
 
 
-class ConfManager:
-    """
-    Base class for all Configuration manager objects
-    """
+class ConfManager(BaseDevice):
+    """Base class for all Configuration Manager objects."""
 
-    def __init__(self, address, port=23451, ssl=True):
+    def __init__(self, address, port=None, ssl=True):
+        """Initialize Configuration manager object."""
+        super().__init__()
+
         self.cvae_addr = address
         self.cvae_port = port
         self.cvae_ssl = ssl
 
-        self._http_timeout = 120
         self._headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
-        if ssl:
-            self._base_url = f'https://{address}:{port}/ConfigurationManager'
+    @property
+    def _base_url(self) -> str:
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        proto = 'https' if self.cvae_ssl else 'http'
+
+        if self.cvae_port is None:
+            port = 25451 if self.cvae_ssl else 25450
         else:
-            self._base_url = f'http://{address}:{port}/ConfigurationManager'
+            port = self.cvae_port
+
+        return f'{proto}://{self.cvae_addr}:{port}/ConfigurationManager'
 
     def __str__(self):
         class_name = self.__class__.__name__
@@ -66,7 +76,7 @@ class ConfManager:
                    'json',
                    'headers',
                    'auth',
-                   'timeout',
+                   'delay',
                    'verify',
                    'cert']
         for key in kwargs:
@@ -82,8 +92,8 @@ class ConfManager:
         # By default SSL cert checking is disabled
         certcheck = kwargs.get('verify', False)
 
-        # Set HTTP timeout (if not set by user)
-        respwait = kwargs.get('timeout', self.http_timeout)
+        # Set HTTP delay (if not set by user)
+        timeout = kwargs.get('delay', self.timeout)
 
         # Prepare request
         path = f'{self._base_url}/{url}'
@@ -96,7 +106,7 @@ class ConfManager:
             warnings.filterwarnings('ignore', category=InsecureRequestWarning)
             try:
                 session = requests.Session()
-                resp = session.send(prep, verify=certcheck, timeout=respwait)
+                resp = session.send(prep, verify=certcheck, timeout=timeout)
                 deltafmt = '%d.%d sec' % (resp.elapsed.seconds,
                                           resp.elapsed.microseconds // 1000)
             except Exception as error:
@@ -127,21 +137,12 @@ class ConfManager:
 
         return resp.status_code, jdata  # success = True, data = json
 
-    def _set_timeout(self, timeout):
-        self._http_timeout = timeout
-
-    def _get_timeout(self):
-        """
-        Number of seconds that Rest API client waits for http(s)
-        reesponse from Configuration Manager. By default: 120 sec
-        """
-        return self._http_timeout
-
-    http_timeout = property(_get_timeout, _set_timeout)
-
 
 class CommandViewAE(ConfManager):
+    """Command View Advanced Edition object."""
+
     def device_reg(self, svp, serialnum, username, password, gen='XP7'):
+        """Register new XP storage array."""
         LOG.debug('Trying to register new storage device on Configuration '
                   'manager. Serial Number:%s, Generation=%s.',
                   serialnum,
@@ -170,6 +171,7 @@ class CommandViewAE(ConfManager):
         return status
 
     def device_unreg(self, serialnum, username, password):
+        """Remove XP storage array registration."""
         LOG.debug('Trying to remove storage device registration on '
                   'Configuration manager. Serial Number:%s.',
                   serialnum)
@@ -200,6 +202,7 @@ class CommandViewAE(ConfManager):
         return False
 
     def device_find(self, serialnum):
+        """Find XP storage array in list of registered."""
         status, data = self._query('v1/objects/storages', method='GET')
         if status == requests.codes.ok:
             for array in data.get('data'):
@@ -209,12 +212,10 @@ class CommandViewAE(ConfManager):
 
 
 class Xp(ConfManager):
-    """
-    XP7 / P9500 class implementation.
-    """
+    """XP7 / P9500 class implementation."""
 
-    def __init__(self, cvae, svp, serialnum, username, password,
-                 gen='XP7', port=23451, ssl=True):
+    def __init__(self, cvae, svp, serialnum, username, password, gen='XP7',
+                 port=23451, ssl=True):
         """
         HPE XP constructor.
 
@@ -222,16 +223,16 @@ class Xp(ConfManager):
             Configuration Manager.
         :param str svp: Hostname or IP address of Service Processor (SVP).
         :param str serialnum: Array serial number (5 or 6 digits)
-        :param str username: User name for HPE XP disk array. Its recommended
-            to create dedicated user with limited rights. It's a bad idea to
-            use "arrayadmin" account.
+        :param str username: User name for HPE XP disk array. Creating a
+            dedicated user with limited rights is recommended. Using
+            "arrayadmin" account is a bad practice.
         :param str password: Password for HPE XP disk array.
         :param str gen: (optional) Disk array generation. Should be P9500 or
-            XP7. By default: XP7.
+            XP7. Default value: XP7.
         :param int port: (optional) Command View AE configuration manager
-            port. By default: 23451
-        :param bool ssl: (optional) Use secure https (True) or plain http.
-            By default: True.
+            port. Default value: 23451
+        :param bool ssl: (optional) Use secure https (True) or plain http (
+            False). Default value: True.
         :return: None.
         """
         super().__init__(cvae, port, ssl)
@@ -242,35 +243,18 @@ class Xp(ConfManager):
         self._username = username
         self._password = password
 
-        self.http_timeout = 300
-
-        # Generate device id
-        if self._gen == 'P9500':
-            self._dev = '7' + str(self._serialnum).rjust(11, '0')
-        elif self._gen == 'XP7':
-            self._dev = '8' + str(self._serialnum).rjust(11, '0')
-        else:
-            LOG.fatal('Unknown array generation. gen="%s"', gen)
-            raise WrongParameter(f'Unknown array generation. gen={gen}.')
-
-        # Generate Base URL for XP
-        self._base_url = '{base}/v1/objects/storages/{dev}'.format(
-            base=self._base_url,
-            dev=self._dev
-        )
-        LOG.debug('Storage device base url = %s', self._base_url)
-
     def __del__(self):
         self.close()
 
     def open(self):
         """
-        Open new Rest API session for HPE XP array. You should call it prior
-        any other requests. Do not forget to call :meth:`Xp.close()` if you
-        don’t plan to use session anymore.
+        Open a new Rest API session for a HPE XP array.
+
+        Call it prior any other requests. Call :meth:`Xp.close()` if you do not
+        plan to use session anymore.
 
         :rtype: bool
-        :return: Return True, if disk array provide valid session key.
+        :return: Return True, if disk array provides a valid session key.
         """
         status, data = self.post(
             'sessions',
@@ -322,12 +306,11 @@ class Xp(ConfManager):
         """
         Close Rest API session.
 
-        :param bool passive: (optional) Do not try to close session in array
-            (just forget client key when your session is already timed out in
-            array). This parameter may be usefull *only for method overriding*
-            in subclasses. It completely useless for you application, because
-            class implementation maintain session live transparent for you.
-            False by default.
+        :param bool passive: (optional) Do not try to close session in the
+            array. Revoke the client session key after session timed out. Use
+            this parameter only for method overriding in subclasses. There is no
+            need of using it, as class implementation manages the session
+            life cycle. Default value: False.
         :return: None
         """
         # Only for active session discard
@@ -341,26 +324,26 @@ class Xp(ConfManager):
 
     def get(self, url, **kwargs):
         """
-        Perform HTTP GET request to HPE XP array. This method used to get
+        Make a HTTP GET request to HPE XP array. Use this method to get \
         information about array objects.
 
-        :param str url: URL address. Base part of url address is generated
-            automatically and you should not care about it. Example of valid
-            url: 'pools', 'parity-groups', 'ldevs'. All available url's and
-            requests result are described in "HPE XP7 Command View Advanced
-            Edition REST API Reference Guide".
+        :param str url: URL address. Th static part of the URL address is
+            generated automatically. Example ofvalid URL: 'pools',
+            'parity-groups', 'ldevs'. All available URL's and requests result
+            are described in "HPE XP7 Command View Advanced Edition REST API
+            Reference Guide".
         :param dict params: (optional) Dictionary with query filter
             parameters. Described in 'Query parameters' section of "HPE XP7
             Command View Advanced Edition REST API Reference Guide".
-        :param dict json: (optional) A JSON serializable object to send in
-            the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.http_timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param dict json: (optional) A JSON serializable object send in the
+            request body.
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -371,18 +354,18 @@ class Xp(ConfManager):
 
     def post(self, url, **kwargs):
         """
-        Perform HTTP POST request to HPE XP array. This method used to
-            create new object.
+        Make a HTTP POST request to HPE XP array. Use this method to create \
+            a new object.
 
         :param dict json: (optional) A JSON serializable object to send in
             the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.http_timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -393,18 +376,18 @@ class Xp(ConfManager):
 
     def delete(self, url, **kwargs):
         """
-        Perform HTTP DELETE request to HPE XP array. This method used to
-            remove objects.
+        Make a HTTP DELETE request to HPE XP array. Use this method to remove \
+        objects.
 
-        :param dict json: (optional) A JSON serializable object to send in
-            the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            :attr:`Xp.http_timeout`.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param dict json: (optional) A JSON serializable object send in the
+            request body.
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -419,13 +402,13 @@ class Xp(ConfManager):
 
         :param dict json: (optional) A JSON serializable object to send in
             the body of request.
-        :param float timeout: (optional) How many second to wait for the Rest
-            server response before giving up. By default use same value as
-            http_timeout.
-        :param bool verify: (optional) Either a boolean, in which case it
-            controls whether we verify the Rest server’s TLS certificate,
-            or a string, in which case it must be a path to a CA
-            bundle to use. By default: False (do not check certificate).
+        :param float timeout: (optional) Number of seconds that Rest API
+            client waits for a response from the Rest server before
+            generating a timeout exception. Default value: :attr:`Xp.timeout`.
+        :param bool verify: (optional) Either a boolean, controlling
+            the Rest server's TLS certificate verification, or a string,
+            where it is a path to a CA bundle. Default value: False (no
+            certificate verification).
         :param str cert: (optional)  String with path to ssl client
             certificate file (.pem) or tuple pair (‘cert’, ‘key’).
         :rtype: (int, {})
@@ -452,10 +435,8 @@ class Xp(ConfManager):
         return status, data
 
     def _is_expired(self, status, data):
-        """
-        Check Rest API session timeout error
-        """
-        # Autorization token wasnt recieved before
+        """Check Rest API session timeout error."""
+        # Authorization token wasnt received before
         if self._headers.get('Authorization') is None:
             return False
 
@@ -478,12 +459,25 @@ class Xp(ConfManager):
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f'<class hpestorapi.{class_name}(dev={self._dev})>'
+        return f'<class hpestorapi.{class_name}(dev={self._serialnum})>'
 
+    @property
+    def _base_url(self) -> str:
+        """
+        Generate static part of URL.
 
-class AuthError(Exception):
-    """ Authentification error """
+        :rtype: str
+        :return: Static part of URL
+        """
+        base = super()._base_url
 
+        # Generate device id
+        if self._gen == 'P9500':
+            dev = '7' + str(self._serialnum).rjust(11, '0')
+        elif self._gen == 'XP7':
+            dev = '8' + str(self._serialnum).rjust(11, '0')
+        else:
+            LOG.fatal('Unknown array generation. gen="%s"', self._gen)
+            raise WrongParameter(f'Unknown array generation. gen={self._gen}.')
 
-class WrongParameter(ValueError):
-    """ Wrong class initialization parameter """
+        return f'{base}/v1/objects/storages/{dev}'

@@ -15,12 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""
-.. module:: hpestorapi.storeonce4
-    :synopsis: Module with HPE StoreOnce Gen4 disk backup device
-
-.. moduleauthor:: Ivan Smirnov <ivan.smirnov@hpe.com>, HPE Pointnext DACH & Russia
-"""
+"""Module with HPE StoreOnce Gen4 disk backup device."""
 
 import logging
 import os
@@ -30,16 +25,17 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from .exceptions import AuthError, WrongParameter
+from .base import BaseDevice
+
 if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.storeonce')
 
 
-class StoreOnceG4:
-    """
-        HPE StoreOnce Gen 4 backup device implementation class.
-    """
+class StoreOnceG4(BaseDevice):
+    """HPE StoreOnce Gen 4 backup device implementation class."""
 
     def __init__(self, address, username, password):
         """
@@ -51,14 +47,11 @@ class StoreOnceG4:
         :param str password: Password for HPE StoreOnce device.
         :return: None.
         """
+        super().__init__()
+
         self._address = address
         self._username = username
         self._password = password
-
-        # Default timeouts:
-        # ConnectionTimeout = 1 second
-        # ReadTimeout = infinity
-        self._timeout = (1.0, None)
 
         self._verify = False
         self._headers = {'Content-Type': 'application/json',
@@ -120,9 +113,10 @@ class StoreOnceG4:
     def open(self, verify=False):
         """
         Open new Rest API session for HPE StoreOnce Gen 4 disk backup.
-        You should call it prior any other requests. Do not forget to
-        call :meth:`StoreOnceG4.close()` if you don’t plan to use
-        current session anymore.
+
+        You should call it prior any other requests. Do not forget to call
+            :meth:`StoreOnceG4.close()` if you don’t plan to use current
+            session anymore.
 
         :param bool|str verify: (optional) Either a boolean, in which
             case it controls whether we verify the Rest server’s TLS
@@ -131,7 +125,6 @@ class StoreOnceG4:
             certificate).
         :return: None
         """
-
         # Check verify parameter
         if isinstance(verify, bool):
             LOG.debug('SSL cert verification set to: %s', verify)
@@ -186,6 +179,8 @@ class StoreOnceG4:
         """
         Close Rest API session.
 
+        You don't need to run it manually if you use context manager.
+
         :return: None
         """
         # Session was not opened before
@@ -208,6 +203,7 @@ class StoreOnceG4:
     def get(self, url, **kwargs):
         """
         Perform HTTP GET request to HPE Storeonce G4 disk backup device.
+
         This method used to get information about objects.
 
         :param str url: URL address. Base part of url address is generated
@@ -232,6 +228,7 @@ class StoreOnceG4:
     def post(self, url, **kwargs):
         """
         Perform HTTP POST request to HPE StoreOnce G4 disk backup device.
+
         This method used to create new object.
 
         :param str url: URL address. Base part of url address is generated
@@ -255,8 +252,10 @@ class StoreOnceG4:
 
     def delete(self, url, **kwargs):
         """
-        Perform HTTP DELETE request to HPE StoreOnce G4 disk backup device
-        array. This method used to remove objects.
+        Perform HTTP DELETE request to HPE StoreOnce G4 disk backup device \
+            array.
+
+        This method used to remove objects.
 
         :param str url: URL address. Base part of url address is generated
             automatically and you should not care about it. Example of valid
@@ -280,6 +279,7 @@ class StoreOnceG4:
     def put(self, url, **kwargs):
         """
         Perform HTTP PUT request to HPE StoreOnce G4 disk backup device array.
+
         This method used to modify objects.
 
         :param str url: URL address. Base part of url address is generated
@@ -301,30 +301,6 @@ class StoreOnceG4:
         """
         return self._query(url, 'PUT', **kwargs)
 
-    def _set_timeout(self, timeout):
-        if isinstance(timeout, (float, int)):
-            self._timeout = (timeout, timeout)
-        elif isinstance(timeout, tuple):
-            self._timeout = timeout
-
-    def _get_timeout(self):
-        return self._timeout
-
-    timeout = property(_get_timeout, _set_timeout)
-    """
-        :var float|tuple timeout: Number of seconds that Rest API
-            client waits for response from HPE StoreOnce Gen 4
-            before timeout exception generation. You can use
-            different timeouts for connection setup and for getting
-            first piece of data. In this case, you should use
-            tuple(float, float) with first value - connection
-            timeout and the second value - read timeout. Or if
-            you want to use same values for both type of timeouts,
-            you can use one float value. 'None' value can be used
-            instead to wait forever for a device response. Default
-            value: (1, None).
-    """
-
     def __enter__(self):
         return self
 
@@ -334,11 +310,3 @@ class StoreOnceG4:
     def __str__(self):
         class_name = self.__class__.__name__
         return f'<class hpestorapi.{class_name}({self._address})>'
-
-
-class AuthError(Exception):
-    """ Authentification error """
-
-
-class WrongParameter(ValueError):
-    """ Wrong class initialization parameter """

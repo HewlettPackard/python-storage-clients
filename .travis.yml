@@ -3,6 +3,8 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
+  - "3.9-dev"
+  - "pypy3"
 
 services:
   - docker
@@ -10,23 +12,29 @@ services:
 before_install:
   - docker build -t storeserv test/storeserv
   - docker build -t storeonce3 test/storeonce3
-  - docker run --detach storeserv
-  - docker run --detach storeonce3
-  - docker ps
+  - docker run --detach --publish 8008:8008 storeserv
+  - docker run --detach --publish 443:443 storeonce3
 
 install:
   - pip install -r requirements/development.txt
 
 script:
+  - git diff --minimal -U0 $TRAVIS_COMMIT_RANGE | flake8 --diff
   - pytest test/
 
-after_script:
+after_script:script:
+
   - docker stop storeserv
-  - docker stop storeserv
+  - docker stop storeonce3
 
 notifications:
   email:
     recipients:
       - ivan.smirnov@hpe.com
     on_success: change
+    on_failure: always
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/251777cc2c3db5f48450
+    on_success: always
     on_failure: always

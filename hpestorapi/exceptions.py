@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#   (C) Copyright 2017-2020 Hewlett Packard Enterprise Development LP
+#   (C) Copyright 2020 Hewlett Packard Enterprise Development LP
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -15,11 +15,12 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""Init module for hpestorapi library."""
+"""Module with common exceptions."""
 
-from .storeserv import StoreServ
-from .storeonce3 import StoreOnceG3
-from .storeonce4 import StoreOnceG4
-from .xp import Xp
-from .xp import CommandViewAE
-from .primera import Primera
+
+class AuthError(Exception):
+    """:raises AuthError: Authentication error."""
+
+
+class WrongParameter(ValueError):
+    """:raises WrongParameter: Unknown or not supported device parameter."""
