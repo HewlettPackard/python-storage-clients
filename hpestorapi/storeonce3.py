@@ -50,16 +50,13 @@ class StoreOnceG3(BaseDevice):
         :param int port: (optional) Custom port number for StoreOnce device.
         :return: None.
         """
+        super().__init__()
+
         self._address = address
         self._user = user
         self._password = password
         self._cookie_dir = cookie_dir
         self._port = port
-
-        # Default timeouts:
-        # ConnectionTimeout = 1 second
-        # ReadTimeout = infinity
-        self._timeout = (1.0, None)
 
     @property
     def cookie_path(self):

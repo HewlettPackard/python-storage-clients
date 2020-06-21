@@ -33,6 +33,12 @@ LOG = logging.getLogger('hpestorapi.base')
 class BaseDevice(ABC):
     """Base device abstract class."""
 
+    def __init__(self):
+        """Initialize base device object."""
+        # Default timeouts:
+        # ConnectionTimeout = 1 second, ReadTimeout = infinity
+        self._timeout = (1, None)
+
     @property
     def timeout(self):
         """

@@ -47,14 +47,11 @@ class StoreOnceG4(BaseDevice):
         :param str password: Password for HPE StoreOnce device.
         :return: None.
         """
+        super().__init__()
+
         self._address = address
         self._username = username
         self._password = password
-
-        # Default timeouts:
-        # ConnectionTimeout = 1 second
-        # ReadTimeout = infinity
-        self._timeout = (1.0, None)
 
         self._verify = False
         self._headers = {'Content-Type': 'application/json',

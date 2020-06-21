@@ -35,22 +35,35 @@ LOG = logging.getLogger('hpestorapi.xp')
 class ConfManager(BaseDevice):
     """Base class for all Configuration Manager objects."""
 
-    def __init__(self, address, port=23451, ssl=True):
+    def __init__(self, address, port=None, ssl=True):
         """Initialize Configuration manager object."""
+        super().__init__()
+
         self.cvae_addr = address
         self.cvae_port = port
         self.cvae_ssl = ssl
 
-        self._timeout = (1, None)
         self._headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
-        if ssl:
-            self._base_url = f'https://{address}:{port}/ConfigurationManager'
+    @property
+    def _base_url(self) -> str:
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        proto = 'https' if self.cvae_ssl else 'http'
+
+        if self.cvae_port is None:
+            port = 25451 if self.cvae_ssl else 25450
         else:
-            self._base_url = f'http://{address}:{port}/ConfigurationManager'
+            port = self.cvae_port
+
+        return f'{proto}://{self.cvae_addr}:{port}/ConfigurationManager'
 
     def __str__(self):
         class_name = self.__class__.__name__
@@ -229,24 +242,6 @@ class Xp(ConfManager):
         self._serialnum = serialnum
         self._username = username
         self._password = password
-
-        self.timeout = 300
-
-        # Generate device id
-        if self._gen == 'P9500':
-            self._dev = '7' + str(self._serialnum).rjust(11, '0')
-        elif self._gen == 'XP7':
-            self._dev = '8' + str(self._serialnum).rjust(11, '0')
-        else:
-            LOG.fatal('Unknown array generation. gen="%s"', gen)
-            raise WrongParameter(f'Unknown array generation. gen={gen}.')
-
-        # Generate Base URL for XP
-        self._base_url = '{base}/v1/objects/storages/{dev}'.format(
-            base=self._base_url,
-            dev=self._dev
-        )
-        LOG.debug('Storage device base url = %s', self._base_url)
 
     def __del__(self):
         self.close()
@@ -464,4 +459,25 @@ class Xp(ConfManager):
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f'<class hpestorapi.{class_name}(dev={self._dev})>'
+        return f'<class hpestorapi.{class_name}(dev={self._serialnum})>'
+
+    @property
+    def _base_url(self) -> str:
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        base = super()._base_url
+
+        # Generate device id
+        if self._gen == 'P9500':
+            dev = '7' + str(self._serialnum).rjust(11, '0')
+        elif self._gen == 'XP7':
+            dev = '8' + str(self._serialnum).rjust(11, '0')
+        else:
+            LOG.fatal('Unknown array generation. gen="%s"', self._gen)
+            raise WrongParameter(f'Unknown array generation. gen={self._gen}.')
+
+        return f'{base}/v1/objects/storages/{dev}'

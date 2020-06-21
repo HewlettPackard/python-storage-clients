@@ -61,6 +61,8 @@ class StoreServ(BaseDevice):
             where it is a path to a CA bundle. Default value: True.
         :return: None
         """
+        super().__init__()
+
         self._address = address
         self._username = username
         self._password = password
@@ -70,11 +72,6 @@ class StoreServ(BaseDevice):
 
         # Session key. None, if there is not active session.
         self._key = None
-
-        # Default timeouts:
-        # ConnectionTimeout = 1 second
-        # ReadTimeout = infinity
-        self._timeout = (1, None)
 
         # Default request headers
         self._headers = {
