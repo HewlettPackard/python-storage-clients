@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
-    :target: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=v1.0.0-alpha.1
+.. image:: https://travis-ci.org/HewlettPackard/python-storage-clients.svg?branch=latest
+    :target: https://travis-ci.org/HewlettPackard/python-storage-clients
 
 .. image:: https://readthedocs.org/projects/hpestorapi/badge/?version=latest
     :target: https://hpestorapi.readthedocs.io/en/latest/?badge=latest
