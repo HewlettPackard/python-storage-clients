@@ -24,6 +24,7 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from .exceptions import AuthError, WrongParameter
+from .base import BaseDevice
 
 if __name__ == "__main__":
     pass
@@ -31,7 +32,7 @@ if __name__ == "__main__":
 LOG = logging.getLogger('hpestorapi.xp')
 
 
-class ConfManager:
+class ConfManager(BaseDevice):
     """Base class for all Configuration Manager objects."""
 
     def __init__(self, address, port=23451, ssl=True):
@@ -122,38 +123,6 @@ class ConfManager:
             return resp.status_code, None
 
         return resp.status_code, jdata  # success = True, data = json
-
-    @property
-    def timeout(self):
-        """
-        Rest API client timeout.
-
-        Number of seconds that Rest API client waits for a response from
-        Configuration Manager before generating a timeout exception.
-        Different timeouts for connection setup and for getting first piece
-        of data can be used. In this case, use tuple(float, float) with the
-        first value being a connection delay and with the second value being
-        a read delay. Alternatively, you can use one float value for both
-        types of timeouts. 'None' value can be used instead not to limit the
-        device response time. Default value: (1, None).
-
-        .. versionchanged:: 1.0.0
-            Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
-        .. versionadded:: 1.0.0
-            Supports ``None`` value to set unlimited delay time.
-        """
-        return self._timeout
-
-    @timeout.setter
-    def timeout(self, delay):
-        if isinstance(delay, (float, int)):
-            self._timeout = (delay, delay)
-        elif isinstance(delay, tuple):
-            self._timeout = delay
-        elif delay is None:
-            self._timeout = (None, None)
-        else:
-            raise WrongParameter('Wrong timeout value.')
 
 
 class CommandViewAE(ConfManager):

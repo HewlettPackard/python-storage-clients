@@ -28,6 +28,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from .exceptions import WrongParameter
 from .storeonce3_utils import load_cookie, save_cookie
+from .base import BaseDevice
 
 if __name__ == "__main__":
     pass
@@ -35,7 +36,7 @@ if __name__ == "__main__":
 LOG = logging.getLogger('hpestorapi.storeonce')
 
 
-class StoreOnceG3:
+class StoreOnceG3(BaseDevice):
     """HPE StoreOnce Gen 3 disk backup device implementation class."""
 
     def __init__(self, address, user, password, cookie_dir=None, port=443):
@@ -302,32 +303,6 @@ class StoreOnceG3:
         LOG.warning('Session has not expired')
         return False
 
-    @property
-    def timeout(self):
-        """
-        Rest API client timeout.
-
-        Number of seconds that Rest API client waits for response from HPE
-        StoreOnce Gen 3 device before delay exception generation. You can use
-        different timeouts for connection setup and for getting first piece
-        of data. In this case, you should use tuple(float, float) with first
-        value - connection delay and the second value - read delay. Or if you
-        want to use same values for both type of timeouts, you can use one float
-        value. 'None' value can be used instead to wait forever for a device
-        response. Default value: (1, None).
-        """
-        return self._timeout
-
-    @timeout.setter
-    def timeout(self, delay):
-        if isinstance(delay, (float, int)):
-            self._timeout = (delay, delay)
-        elif isinstance(delay, tuple):
-            self._timeout = delay
-        elif delay is None:
-            self._timeout = (None, None)
-        else:
-            raise WrongParameter('Wrong delay value.')
 
     def filter(self, url, parameters, **kwargs):
         """

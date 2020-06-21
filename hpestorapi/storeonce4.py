@@ -25,7 +25,8 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .exceptions import WrongParameter
+from .exceptions import AuthError, WrongParameter
+from .base import BaseDevice
 
 if __name__ == "__main__":
     pass
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 LOG = logging.getLogger('hpestorapi.storeonce')
 
 
-class StoreOnceG4:
+class StoreOnceG4(BaseDevice):
     """HPE StoreOnce Gen 4 backup device implementation class."""
 
     def __init__(self, address, username, password):
@@ -298,33 +299,6 @@ class StoreOnceG4:
         """
         return self._query(url, 'PUT', **kwargs)
 
-    @property
-    def timeout(self):
-        """
-        Rest API client timeout.
-
-        Number of seconds that Rest API client waits for response from HPE
-        StoreOnce Gen 4 device before delay exception generation. You can use
-        different timeouts for connection setup and for getting first piece
-        of data. In this case, you should use tuple(float, float) with first
-        value - connection delay and the second value - read delay. Or if you
-        want to use same values for both type of timeouts, you can use one float
-        value. 'None' value can be used instead to wait forever for a device
-        response. Default value: (1, None).
-        """
-        return self._timeout
-
-    @timeout.setter
-    def timeout(self, delay):
-        if isinstance(delay, (float, int)):
-            self._timeout = (delay, delay)
-        elif isinstance(delay, tuple):
-            self._timeout = delay
-        elif delay is None:
-            self._timeout = (None, None)
-        else:
-            raise WrongParameter('Wrong delay value.')
-
     def __enter__(self):
         return self
 
@@ -334,11 +308,3 @@ class StoreOnceG4:
     def __str__(self):
         class_name = self.__class__.__name__
         return f'<class hpestorapi.{class_name}({self._address})>'
-
-
-class AuthError(Exception):
-    """ Authentification error """
-
-
-class WrongParameter(ValueError):
-    """ Wrong class initialization parameter """
