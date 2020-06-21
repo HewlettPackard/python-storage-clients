@@ -117,9 +117,9 @@ class StoreOnceG4(BaseDevice):
         """
         Open new Rest API session for HPE StoreOnce Gen 4 disk backup.
 
-        You should call it prior any other requests. Do not forget to call \
-        :meth:`StoreOnceG4.close()` if you don’t plan to use
-        current session anymore.
+        You should call it prior any other requests. Do not forget to call
+            :meth:`StoreOnceG4.close()` if you don’t plan to use current
+            session anymore.
 
         :param bool|str verify: (optional) Either a boolean, in which
             case it controls whether we verify the Rest server’s TLS
@@ -128,7 +128,6 @@ class StoreOnceG4(BaseDevice):
             certificate).
         :return: None
         """
-
         # Check verify parameter
         if isinstance(verify, bool):
             LOG.debug('SSL cert verification set to: %s', verify)
@@ -181,8 +180,9 @@ class StoreOnceG4(BaseDevice):
 
     def close(self):
         """
-        Close Rest API session. You don't need to run it manually if you use
-        context manager.
+        Close Rest API session.
+
+        You don't need to run it manually if you use context manager.
 
         :return: None
         """
@@ -206,6 +206,7 @@ class StoreOnceG4(BaseDevice):
     def get(self, url, **kwargs):
         """
         Perform HTTP GET request to HPE Storeonce G4 disk backup device.
+
         This method used to get information about objects.
 
         :param str url: URL address. Base part of url address is generated
@@ -230,6 +231,7 @@ class StoreOnceG4(BaseDevice):
     def post(self, url, **kwargs):
         """
         Perform HTTP POST request to HPE StoreOnce G4 disk backup device.
+
         This method used to create new object.
 
         :param str url: URL address. Base part of url address is generated
@@ -253,8 +255,10 @@ class StoreOnceG4(BaseDevice):
 
     def delete(self, url, **kwargs):
         """
-        Perform HTTP DELETE request to HPE StoreOnce G4 disk backup device
-        array. This method used to remove objects.
+        Perform HTTP DELETE request to HPE StoreOnce G4 disk backup device \
+            array.
+
+        This method used to remove objects.
 
         :param str url: URL address. Base part of url address is generated
             automatically and you should not care about it. Example of valid
@@ -278,6 +282,7 @@ class StoreOnceG4(BaseDevice):
     def put(self, url, **kwargs):
         """
         Perform HTTP PUT request to HPE StoreOnce G4 disk backup device array.
+
         This method used to modify objects.
 
         :param str url: URL address. Base part of url address is generated

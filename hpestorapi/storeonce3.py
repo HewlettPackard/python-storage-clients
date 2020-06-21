@@ -26,7 +26,6 @@ from xml.etree import ElementTree as ETree
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .exceptions import WrongParameter
 from .storeonce3_utils import load_cookie, save_cookie
 from .base import BaseDevice
 
@@ -108,6 +107,7 @@ class StoreOnceG3(BaseDevice):
         return f'<class hpestorapi.{class_name}(address={self._address})>'
 
     def query(self, url, method, **kwargs):
+        """Perform HTTP request to HPE 3PAR StoreOnce Gen3 device."""
         # Filter allowed kwargs to option dict
         allowed = ['params',
                    'data',
@@ -302,7 +302,6 @@ class StoreOnceG3(BaseDevice):
 
         LOG.warning('Session has not expired')
         return False
-
 
     def filter(self, url, parameters, **kwargs):
         """
