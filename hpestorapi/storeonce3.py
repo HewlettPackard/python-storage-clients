@@ -89,7 +89,7 @@ class StoreOnceG3(BaseDevice):
     cookie_auth = property(_get_cookie_auth, _set_cookie_auth)
 
     @property
-    def base_url(self):
+    def _base_url(self):
         """
         Generate static part of URL.
 
@@ -142,7 +142,8 @@ class StoreOnceG3(BaseDevice):
         namespace = kwargs.pop('namespace', 'storeonceservices')
 
         # Prepare request
-        path = '%s/%s/%s/' % (self.base_url, namespace.strip('/'), f'{url}'.strip('/'))
+        path = '%s/%s/%s/' % (self._base_url, namespace.strip('/'),
+                              f'{url}'.strip('/'))
         session = requests.Session()
         request = requests.Request(method, path, **option)
         prepped = session.prepare_request(request)
