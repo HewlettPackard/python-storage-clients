@@ -25,7 +25,7 @@ copyright = '2017-2020, HPE Pointnext DACH & Russia'
 author = 'Ivan Smirnov'
 
 # The short X.Y version
-version = '1.0.0'
+version = '1.0.0-beta.1'
 # The full version, including alpha/beta/rc tags
 release = version
 

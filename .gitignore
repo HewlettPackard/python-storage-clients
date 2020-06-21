@@ -13,3 +13,6 @@ hpestorapi.egg-info/
 
 # Test utilities
 .tox/
+
+# Documentation build directory
+doc/build/
