@@ -59,3 +59,14 @@ class BaseDevice(ABC):
             self._timeout = (None, None)
         else:
             raise WrongParameter('Wrong timeout value.')
+
+    @property
+    @abstractmethod
+    def _base_url(self) -> str:
+        """
+        Generate static part of URL.
+
+        :rtype: str
+        :return: Static part of URL
+        """
+        raise NotImplementedError
