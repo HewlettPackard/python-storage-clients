@@ -6,6 +6,7 @@ API reference
 .. autoclass:: hpestorapi.StoreServ
     :members:
     :undoc-members:
+    :inherited-members: timeout
 
 Usage examples
 --------------------------------------------------------------------------------

@@ -7,6 +7,7 @@ API references
 .. autoclass:: hpestorapi.StoreOnceG4
     :members:
     :undoc-members:
+    :inherited-members: timeout
 
 Usage examples
 --------------------------------------------------------------------------------

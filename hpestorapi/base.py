@@ -30,7 +30,7 @@ if __name__ == "__main__":
 LOG = logging.getLogger('hpestorapi.base')
 
 
-class BaseDevice():
+class BaseDevice(ABC):
     """Base device abstract class."""
 
     @property
@@ -46,11 +46,6 @@ class BaseDevice():
         a read delay. Alternatively, you can use one float value for both
         types of timeouts. 'None' value can be used instead not to limit the
         device response time. Default value: (1, None).
-
-        .. versionchanged:: 1.0.0
-            Attribute :attr:`http_timeout` renamed to :attr:`timeout`.
-        .. versionadded:: 1.0.0
-            Supports ``None`` value to set unlimited delay time.
         """
         return self._timeout
 
