@@ -15,7 +15,7 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-"""Module with HPE Primera disk array wrapper."""
+"""Init module for hpestorapi library."""
 
 from .storeserv import StoreServ
 from .storeonce3 import StoreOnceG3
