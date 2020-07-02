@@ -36,7 +36,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.storeonce')
+LOG = logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler)
 
 
 class StoreOnceG3:
