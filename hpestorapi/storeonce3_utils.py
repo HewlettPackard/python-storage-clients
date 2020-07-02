@@ -21,7 +21,7 @@ import logging
 from os.path import isfile
 import pickle
 
-LOG = logging.getLogger('hpestorapi.storeonce')
+LOG = logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler)
 
 
 def load_cookie(filepath):

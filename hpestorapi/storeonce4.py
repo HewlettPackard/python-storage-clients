@@ -31,7 +31,7 @@ from .base import BaseDevice
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.storeonce')
+LOG = logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler)
 
 
 class StoreOnceG4(BaseDevice):

@@ -30,7 +30,7 @@ from .base import BaseDevice
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.storeserv')
+LOG = logging.getLogger('hpestorapi.storeserv').addHandler(logging.NullHandler)
 
 
 class StoreServ(BaseDevice):
