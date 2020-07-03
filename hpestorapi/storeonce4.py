@@ -32,6 +32,7 @@ if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.storeonce')
+LOG.addHandler(logging.NullHandler)
 
 
 class StoreOnceG4(BaseDevice):

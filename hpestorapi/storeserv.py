@@ -31,6 +31,7 @@ if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.storeserv')
+LOG.addHandler(logging.NullHandler)
 
 
 class StoreServ(BaseDevice):

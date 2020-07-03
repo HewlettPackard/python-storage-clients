@@ -28,6 +28,7 @@ if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.base')
+LOG.addHandler(logging.NullHandler)
 
 
 class BaseDevice(ABC):

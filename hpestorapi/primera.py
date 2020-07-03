@@ -26,6 +26,7 @@ if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.primera')
+LOG.addHandler(logging.NullHandler)
 
 
 class Primera(StoreServ):

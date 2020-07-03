@@ -30,6 +30,7 @@ if __name__ == "__main__":
     pass
 
 LOG = logging.getLogger('hpestorapi.xp')
+LOG.addHandler(logging.NullHandler)
 
 
 class ConfManager(BaseDevice):
