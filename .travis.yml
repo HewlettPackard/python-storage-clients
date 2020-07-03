@@ -19,7 +19,7 @@ install:
   - pip install -r requirements/development.txt
 
 script:
-  - git diff --minimal -U0 $TRAVIS_COMMIT_RANGE | flake8 --diff
+  - flake8
   - pytest test/
 
 after_script:
