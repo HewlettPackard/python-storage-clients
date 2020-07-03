@@ -1,7 +1,7 @@
 Change Log
 ************************************************************************
 
-Version 0.9.10 (July 03, 2020)
+Version 0.9.11 (July 03, 2020)
 ========================================================================
 Issue resolved:
 
@@ -17,7 +17,7 @@ Version 0.9.8 (April 22, 2020)
 ========================================================================
 
 * Minor changes in StoreOnceG3 implementation
-* Documentation coverage improvments
+* Documentation coverage improvements
 
 There is no plans to implement new functions in branch 0.9.x. Only for bugfixes.
 
