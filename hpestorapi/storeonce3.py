@@ -325,7 +325,10 @@ class StoreOnceG3(BaseDevice):
 
 
 class Iterator:
+    """Iterator for StoreOnceG3 objects."""
+
     def __init__(self, device, url, items, filter=None):
+        """StoreOnceG3 iterator initialization."""
         self.device = device
         self.url = url
         self.items = items
