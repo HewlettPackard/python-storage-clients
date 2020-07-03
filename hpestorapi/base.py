@@ -27,8 +27,8 @@ from .exceptions import WrongParameter
 if __name__ == "__main__":
     pass
 
+logging.getLogger('hpestorapi.base').addHandler(logging.NullHandler())
 LOG = logging.getLogger('hpestorapi.base')
-LOG.addHandler(logging.NullHandler)
 
 
 class BaseDevice(ABC):

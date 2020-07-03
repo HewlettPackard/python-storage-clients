@@ -21,6 +21,7 @@ import logging
 from os.path import isfile
 import pickle
 
+logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler())
 LOG = logging.getLogger('hpestorapi.storeonce')
 
 

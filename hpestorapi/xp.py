@@ -29,8 +29,8 @@ from .base import BaseDevice
 if __name__ == "__main__":
     pass
 
+logging.getLogger('hpestorapi.xp').addHandler(logging.NullHandler())
 LOG = logging.getLogger('hpestorapi.xp')
-LOG.addHandler(logging.NullHandler)
 
 
 class ConfManager(BaseDevice):
