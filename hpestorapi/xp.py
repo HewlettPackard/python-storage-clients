@@ -31,7 +31,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.xp').addHandler(logging.NullHandler)
+logging.getLogger('hpestorapi.xp').addHandler(logging.NullHandler())
+LOG = logging.getLogger('hpestorapi.xp')
 
 
 class ConfManager:

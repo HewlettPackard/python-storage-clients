@@ -29,7 +29,8 @@ from hpestorapi import StoreServ
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.primera').addHandler(logging.NullHandler)
+logging.getLogger('hpestorapi.primera').addHandler(logging.NullHandler())
+LOG = logging.getLogger('hpestorapi.primera')
 
 
 class Primera(StoreServ):
