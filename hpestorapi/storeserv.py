@@ -25,8 +25,7 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from hpestorapi.exceptions import AuthError
-from hpestorapi.base import BaseDevice
-#from hpestorapi.tracer import tracer
+from hpestorapi.base import BaseDevice, tracer
 
 if __name__ == "__main__":
     pass
@@ -88,7 +87,7 @@ class StoreServ(BaseDevice):
         if self._key is not None:
             self.close()
 
-    #@tracer
+    @tracer
     def _query(self, url, method, **kwargs):
         """
         Perform HTTP request to HPE 3PAR array.
@@ -176,7 +175,7 @@ class StoreServ(BaseDevice):
 
         return resp.status_code, jdata
 
-    #@tracer
+    @tracer
     def open(self) -> None:
         """
         Open new Rest API session for HPE 3PAR array.
@@ -206,7 +205,7 @@ class StoreServ(BaseDevice):
             raise AuthError('Cannot connect to StoreServ. '
                             'Authentification error: %s', data['desc'])
 
-    #@tracer
+    @tracer
     def close(self) -> None:
         """
         Close Rest API session.
