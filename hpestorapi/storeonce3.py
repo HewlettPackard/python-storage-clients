@@ -27,7 +27,7 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from hpestorapi.storeonce3_utils import load_cookie, save_cookie
-from hpestorapi.base import BaseDevice
+from hpestorapi.base import BaseDevice, tracer
 
 if __name__ == "__main__":
     pass
@@ -104,6 +104,7 @@ class StoreOnceG3(BaseDevice):
         class_name = self.__class__.__name__
         return f'<class hpestorapi.{class_name}(address={self._address})>'
 
+    @tracer
     def query(self, url, method, **kwargs):
         """Perform HTTP request to HPE 3PAR StoreOnce Gen3 device."""
         # Filter allowed kwargs to option dict
@@ -178,6 +179,7 @@ class StoreOnceG3(BaseDevice):
 
         return resp
 
+    @tracer
     def get(self, url, **kwargs):
         """
         Make a HTTP GET request to HPE StoreOnce disk backup device.
@@ -265,6 +267,7 @@ class StoreOnceG3(BaseDevice):
         resp = self.query(url, 'DELETE', **kwargs)
         return (resp.status_code, resp.content.decode('utf-8'))
 
+    @tracer
     def open(self, use_cookie_file=True):
         """
         Open new Rest API session for HPE StoreOnce disk backup device.
@@ -291,6 +294,7 @@ class StoreOnceG3(BaseDevice):
         LOG.fatal('Cant authentificate on storeonce appliance')
         return False
 
+    @tracer
     def _is_expired(self, request):
         page = ETree.fromstring(request.content)
         msg = page.find('./errors/error/message')
@@ -302,6 +306,7 @@ class StoreOnceG3(BaseDevice):
         LOG.warning('Session has not expired')
         return False
 
+    @tracer
     def filter(self, url, parameters, **kwargs):
         """
         Get cookies for query with filtering.
