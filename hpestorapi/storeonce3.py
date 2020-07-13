@@ -26,8 +26,8 @@ from xml.etree import ElementTree as ETree
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .storeonce3_utils import load_cookie, save_cookie
-from .base import BaseDevice
+from hpestorapi.storeonce3_utils import load_cookie, save_cookie
+from hpestorapi.base import BaseDevice
 
 if __name__ == "__main__":
     pass

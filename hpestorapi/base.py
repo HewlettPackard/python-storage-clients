@@ -21,7 +21,7 @@
 import logging
 from abc import ABC, abstractmethod
 
-from .exceptions import WrongParameter
+from hpestorapi.exceptions import WrongParameter
 
 
 if __name__ == "__main__":

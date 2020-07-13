@@ -23,8 +23,8 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .exceptions import AuthError, WrongParameter
-from .base import BaseDevice
+from hpestorapi.exceptions import AuthError, WrongParameter
+from hpestorapi.base import BaseDevice
 
 if __name__ == "__main__":
     pass
