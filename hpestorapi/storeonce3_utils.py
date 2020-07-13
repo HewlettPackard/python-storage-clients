@@ -26,6 +26,7 @@ from hpestorapi.base import tracer
 logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler())
 LOG = logging.getLogger('hpestorapi.storeonce')
 
+
 @tracer
 def load_cookie(filepath):
     """
@@ -63,6 +64,7 @@ def load_cookie(filepath):
             return cookie
 
     return None
+
 
 @tracer
 def save_cookie(filepath, cookie):
