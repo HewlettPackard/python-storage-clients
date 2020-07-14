@@ -17,6 +17,9 @@
 
 """Init module for hpestorapi library."""
 
+# Remove flake8 warnings "imported but unused"
+# flake8: noqa: F401
+
 from .storeserv import StoreServ
 from .storeonce3 import StoreOnceG3
 from .storeonce4 import StoreOnceG4

@@ -25,13 +25,14 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from .exceptions import AuthError, WrongParameter
-from .base import BaseDevice
+from hpestorapi.exceptions import AuthError, WrongParameter
+from hpestorapi.base import BaseDevice, tracer
 
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler)
+logging.getLogger('hpestorapi.storeonce').addHandler(logging.NullHandler())
+LOG = logging.getLogger('hpestorapi.storeonce')
 
 
 class StoreOnceG4(BaseDevice):
@@ -57,6 +58,7 @@ class StoreOnceG4(BaseDevice):
         self._headers = {'Content-Type': 'application/json',
                          'Accept': 'application/json'}
 
+    @tracer
     def _query(self, url, method, **kwargs):
         # Set SSL cert checking
         verify = kwargs.pop('verify', self._verify)
@@ -110,6 +112,7 @@ class StoreOnceG4(BaseDevice):
 
         return resp.status_code, jdata  # success = True, data = json
 
+    @tracer
     def open(self, verify=False):
         """
         Open new Rest API session for HPE StoreOnce Gen 4 disk backup.
@@ -175,6 +178,7 @@ class StoreOnceG4(BaseDevice):
                       self._address)
             raise AuthError(data)
 
+    @tracer
     def close(self):
         """
         Close Rest API session.

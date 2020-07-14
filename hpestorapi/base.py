@@ -19,15 +19,28 @@
 
 
 import logging
+from functools import wraps
 from abc import ABC, abstractmethod
 
-from .exceptions import WrongParameter
+from hpestorapi.exceptions import WrongParameter
 
 
 if __name__ == "__main__":
     pass
 
-LOG = logging.getLogger('hpestorapi.base').addHandler(logging.NullHandler)
+logging.getLogger('hpestorapi').addHandler(logging.NullHandler())
+LOG = logging.getLogger('hpestorapi')
+
+
+def tracer(func):
+    """Call tracer for functions and methods."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        params = ', '.join(tuple(f'{a}' for a in args)
+                           + tuple(f'{k}={v}' for k, v in kwargs.items()))
+        LOG.debug(f'{func.__name__}({params})')
+        return func(*args, **kwargs)
+    return wrapper
 
 
 class BaseDevice(ABC):
