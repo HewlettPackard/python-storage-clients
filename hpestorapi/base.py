@@ -22,8 +22,6 @@ import logging
 from functools import wraps
 from abc import ABC, abstractmethod
 
-from hpestorapi.exceptions import WrongParameter
-
 
 if __name__ == "__main__":
     pass
@@ -77,7 +75,7 @@ class BaseDevice(ABC):
         elif delay is None:
             self._timeout = (None, None)
         else:
-            raise WrongParameter('Wrong timeout value.')
+            raise ParameterError('Wrong timeout value.')
 
     @property
     @abstractmethod
@@ -89,3 +87,11 @@ class BaseDevice(ABC):
         :return: Static part of URL
         """
         raise NotImplementedError
+
+
+class AuthError(Exception):
+    """:raises AuthError: Authentication error."""
+
+
+class ParameterError(ValueError):
+    """:raises ParameterError: Unknown or not supported device parameter."""

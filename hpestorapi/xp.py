@@ -23,8 +23,7 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from hpestorapi.exceptions import AuthError, WrongParameter
-from hpestorapi.base import BaseDevice
+from hpestorapi.base import BaseDevice, AuthError, ParameterError
 
 if __name__ == "__main__":
     pass
@@ -479,6 +478,6 @@ class Xp(ConfManager):
             dev = '8' + str(self._serialnum).rjust(11, '0')
         else:
             LOG.fatal('Unknown array generation. gen="%s"', self._gen)
-            raise WrongParameter(f'Unknown array generation. gen={self._gen}.')
+            raise ParameterError(f'Unknown array generation. gen={self._gen}.')
 
         return f'{base}/v1/objects/storages/{dev}'

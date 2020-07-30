@@ -25,8 +25,7 @@ import warnings
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from hpestorapi.exceptions import AuthError, WrongParameter
-from hpestorapi.base import BaseDevice, tracer
+from hpestorapi.base import BaseDevice, tracer, AuthError, ParameterError
 
 if __name__ == "__main__":
     pass
@@ -148,7 +147,7 @@ class StoreOnceG4(BaseDevice):
             # Invalid type fot `verify` parameter
             LOG.fatal('Invalid type for `verify` parameter. Must be bool or '
                       'str.')
-            raise WrongParameter('Invalid type for verify parameter. '
+            raise ParameterError('Invalid type for verify parameter. '
                                  'Type: %s' % type(verify).__name__)
 
         # Message body for authentification request

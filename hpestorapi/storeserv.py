@@ -24,8 +24,7 @@ from urllib.parse import quote
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from hpestorapi.exceptions import AuthError
-from hpestorapi.base import BaseDevice, tracer
+from hpestorapi.base import BaseDevice, tracer, AuthError
 
 if __name__ == "__main__":
     pass
