@@ -150,12 +150,8 @@ class StoreServ(BaseDevice):
                             resp.content)
             return resp.status_code, None
 
-        # Check wsapi session delay error
-        if (resp.status_code == 403) and (jdata.get('code', None) == 6):
-            if self._key is not None:
-                LOG.info('Session delay occurs. Session key is invalid. '
-                         'Try to get new one.')
-
+        # Check wsapi session key expiration error
+        if self.__is_token_expired(resp):
             # Just forget about current (inactive) session
             self._headers.pop('X-HP3PAR-WSAPI-SessionKey', None)
             self._key = None
@@ -173,6 +169,32 @@ class StoreServ(BaseDevice):
                 return replay
 
         return resp.status_code, jdata
+
+    @staticmethod
+    def __is_token_expired(response=None) -> bool:
+        """
+        Check Rest server response for session key expiration error.
+
+        :param requests.Response() response: Rest server response.
+        :rtype: bool
+        :return: `True` - if session key was expired, `False` in all other
+            cases.
+        """
+        if not isinstance(response, requests.Response):
+            LOG.error('Unexpected object type. Must be `requests.Response()`. '
+                      'Skipping session expiration check.')
+            return False
+
+        try:
+            body = response.json()
+        except ValueError:
+            return False
+
+        if (response.status_code == 403) and (body.get('code', None) == 6):
+            LOG.debug('Session expiration occurs. Session key is invalid.')
+            return True
+
+        return False
 
     @tracer
     def open(self) -> None:
@@ -214,22 +236,22 @@ class StoreServ(BaseDevice):
 
         :return: None
         """
-        # There isnt active session
+        # There is not active session
         if self._key is None:
-            LOG.debug('There isnt active session - skipping session close.')
+            LOG.debug('There is not active session - skipping session close.')
             return
 
         # Try to close active session
-        path = 'credentials/' + self._key
+        path = f'credentials/{self._key}'
         try:
             self.delete(path)
         except Exception as error:
             LOG.warning('Cannot close StoreServ 3PAR session '
                         'gracefully. Exception occured: %s',
                         repr(error))
-        else:
-            self._headers.pop('X-HP3PAR-WSAPI-SessionKey')
-            self._key = None
+
+        self._headers.pop('X-HP3PAR-WSAPI-SessionKey')
+        self._key = None
 
     def get(self, url, query=None):
         """
