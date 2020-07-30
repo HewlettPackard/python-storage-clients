@@ -103,7 +103,7 @@ class StoreServ(BaseDevice):
             Second value may be None if 3PAR array returns no message body,
         """
         # Set connection delay and read delay
-        timeout = kwargs.pop('delay', self.timeout)
+        timeout = kwargs.pop('timeout', self.timeout)
 
         # Add default and auth headers to parameter list
         kwargs.setdefault('headers', dict())
