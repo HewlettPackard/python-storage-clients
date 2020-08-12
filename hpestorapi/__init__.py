@@ -28,8 +28,5 @@ from .xp import CommandViewAE
 from .primera import Primera
 
 
-# Version number
-major = '1'
-minor = '0'
-patch = '0'
-__version__ = '.'.join([major, minor, patch])
+#  Semantic version number. Format: <MAJOR>.<MINOR>.<PATCH>
+__version__ = '1.0.0'
