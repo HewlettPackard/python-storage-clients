@@ -26,3 +26,10 @@ from .storeonce4 import StoreOnceG4
 from .xp import Xp
 from .xp import CommandViewAE
 from .primera import Primera
+
+
+# Version number
+major = '1'
+minor = '0'
+patch = '0'
+__version__ = '.'.join([major, minor, patch])

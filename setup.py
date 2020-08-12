@@ -18,10 +18,11 @@
 """Module for python setuptools."""
 
 from setuptools import setup
-from doc.source.conf import project, version
+from doc.source.conf import project
+from hpestorapi import __version__
 
 setup(
     name=project,
     packages=[project],
-    version=version,
+    version=__version__,
 )
