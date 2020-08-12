@@ -17,6 +17,7 @@ import sys
 
 # Path to project package
 sys.path.insert(0, os.path.abspath('../../'))
+from hpestorapi import __version__
 
 # -- Project information -----------------------------------------------------
 
@@ -25,7 +26,7 @@ copyright = '2017-2020, HPE Pointnext DACH & Russia'
 author = 'Ivan Smirnov'
 
 # The short X.Y version
-version = '0.9.11'
+version = __version__
 # The full version, including alpha/beta/rc tags
 release = version
 

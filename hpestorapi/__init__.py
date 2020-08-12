@@ -25,3 +25,7 @@ from .storeonce4 import StoreOnceG4
 from .xp import Xp
 from .xp import CommandViewAE
 from .primera import Primera
+
+
+# Version number
+__version__ = 1.0.0
