@@ -26,6 +26,5 @@ from .xp import Xp
 from .xp import CommandViewAE
 from .primera import Primera
 
-
 # Version number
-__version__ = 1.0.0
+__version__ = 0.9.12
