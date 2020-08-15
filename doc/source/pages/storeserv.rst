@@ -68,7 +68,7 @@ Copy Groups names beginning with "dfs".
     with StoreServ('10.0.0.1', '3paruser', '3parpass') as array:
         try:
             array.open()
-            status, data = array.get('remotecopygroups', query='name LIKE <dfs*>')
+            status, data = array.get('remotecopygroups', query='name LIKE dfs*')
         except Exception as error:
             print('Something went wrong:')
             raise error
