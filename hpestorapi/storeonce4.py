@@ -70,7 +70,7 @@ class StoreOnceG4(BaseDevice):
         kwargs['headers'].update(self._headers)
 
         # Prepare request
-        path = 'https://%s/%s' % (self._address, url.strip('/'))
+        path = '%s/%s' % (self._base_url(), url.strip('/'))
         LOG.debug('%s(`%s`)', method, path)
         request = requests.Request(method, path, **kwargs)
         prep = request.prepare()
@@ -313,3 +313,6 @@ class StoreOnceG4(BaseDevice):
     def __str__(self):
         class_name = self.__class__.__name__
         return f'<class hpestorapi.{class_name}({self._address})>'
+
+    def _base_url(self) -> str:
+        return f'https://{self._address}'
