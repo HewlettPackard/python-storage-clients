@@ -15,7 +15,7 @@ Usage examples
 Session management
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Open Rest API session for StoreOnce Gen 4 disk backup device:
+Open Rest API session for StoreOnce G3 disk backup device:
 
 .. code:: python
 
