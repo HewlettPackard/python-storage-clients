@@ -222,7 +222,7 @@ class StoreServ(BaseDevice):
         """
         auth = {'user': self._username, 'password': self._password}
         status, data = self.post('credentials', body=auth)
-        if status == HTTPStatus.ACCEPTED:
+        if status == HTTPStatus.CREATED:
             # 201 (created) => Session succefully created
             self._headers.update({'X-HP3PAR-WSAPI-SessionKey': data['key']})
             self._key = data['key']
