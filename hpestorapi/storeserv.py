@@ -20,6 +20,7 @@
 import logging
 import warnings
 from urllib.parse import quote
+from http import HTTPStatus
 
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -130,7 +131,10 @@ class StoreServ(BaseDevice):
                 raise
 
         # Check Rest service response
-        if resp.status_code not in [200, 201, 202, 204]:
+        if resp.status_code not in [HTTPStatus.OK,
+                                    HTTPStatus.CREATED,
+                                    HTTPStatus.ACCEPTED,
+                                    HTTPStatus.NO_CONTENT]:
             LOG.warning('Return code %s, response delay %s',
                         resp.status_code,
                         deltafmt)
@@ -190,7 +194,8 @@ class StoreServ(BaseDevice):
         except ValueError:
             return False
 
-        if (response.status_code == 403) and (body.get('code', None) == 6):
+        if (response.status_code == HTTPStatus.FORBIDDEN) and \
+                (body.get('code', None) == 6):
             LOG.debug('Session expiration occurs. Session key is invalid.')
             return True
 
@@ -217,11 +222,11 @@ class StoreServ(BaseDevice):
         """
         auth = {'user': self._username, 'password': self._password}
         status, data = self.post('credentials', body=auth)
-        if status == 201:
+        if status == HTTPStatus.ACCEPTED:
             # 201 (created) => Session succefully created
             self._headers.update({'X-HP3PAR-WSAPI-SessionKey': data['key']})
             self._key = data['key']
-        elif status == 403:
+        elif status == HTTPStatus.FORBIDDEN:
             # 403 (forbidden) => Wrong user or password
             raise AuthError('Cannot connect to StoreServ. '
                             'Authentification error: %s', data['desc'])
