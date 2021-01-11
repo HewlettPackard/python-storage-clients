@@ -3,7 +3,7 @@ Sphinx==3.4.2
 sphinx-rtd-theme
 pylint==2.6.0
 pylama==7.7.1
-tox==3.20.1
+tox==3.21.0
 tox-docker==1.7.0
 flake8==3.8.4
 flake8-single-quotes==0.1.0
