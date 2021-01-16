@@ -1,13 +1,25 @@
 Change Log
 ================================================================================
 
-Version 1.0.0-beta.1 (June 22, 2020)
+Version 1.0.0 (Jan 18, 2021)
 --------------------------------------------------------------------------------
 
 * API fixation
 * Internal design improvements
 * Documentation improvements
 
+
+Version 0.9.12 (August 12, 2020)
+========================================================================
+Enhancement:
+
+* Package version number added as __version__ attribute (PEP 396).
+
+Version 0.9.11 (July 03, 2020)
+========================================================================
+Issue resolved:
+
+* Fix: unrequested logging to stderr removed
 
 Version 0.9.9 (May 15, 202)
 --------------------------------------------------------------------------------
