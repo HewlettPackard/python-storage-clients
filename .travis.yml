@@ -23,7 +23,8 @@ script:
   - flake8
   - pytest test/
 
-after_script:
+after_script:script:
+
   - docker stop storeserv
   - docker stop storeonce3
 

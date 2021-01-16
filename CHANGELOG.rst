@@ -1,9 +1,19 @@
 Change Log
 ================================================================================
 
-Version 0.10.1 (TBD)
+Version 1.0.0-beta.1 (June 22, 2020)
 --------------------------------------------------------------------------------
 
+* API fixation
+* Internal design improvements
+* Documentation improvements
+
+
+Version 0.9.9 (May 15, 202)
+--------------------------------------------------------------------------------
+Issue resolved:
+
+* StoreOnceG3: Standart HTTP headers (Accept, Content-Type) can be overrided by user (GitHub issue #6).
 
 Version 0.9.8 (April 22, 2020)
 --------------------------------------------------------------------------------
