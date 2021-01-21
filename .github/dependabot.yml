@@ -7,8 +7,4 @@ updates:
   open-pull-requests-limit: 10
   target-branch: latest
   reviewers:
-<<<<<<< HEAD
   - IvanVSmirnov
-=======
-  - IvanVSmirnov
->>>>>>> 90c72186d907feaeabb462238ef3d2743812bedf
