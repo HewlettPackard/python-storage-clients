@@ -10,4 +10,4 @@ flake8-single-quotes==0.1.0
 flake8-logging-format==0.6.0
 flake8-docstrings==1.6.0
 flake8-rst-docstrings==0.2.5
-responses==0.13.3
+responses==0.20.0
